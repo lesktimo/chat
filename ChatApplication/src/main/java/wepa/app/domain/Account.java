@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wepa.app.domain;
 
 import java.util.List;
@@ -11,10 +6,35 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Account extends AbstractPersistable<Long>{
-    
-    
+public class Account extends AbstractPersistable<Long> {
+
     @OneToMany(mappedBy = "account")
     private List<Message> messages;
-    
+    private String username;
+    private String password;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

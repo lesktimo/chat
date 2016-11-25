@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wepa.app.domain;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;
-
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-
 import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -19,8 +12,6 @@ public class Message extends AbstractPersistable<Long> {
 
     private Timestamp timestamp;
     private String content;
-
-
 
     @ManyToOne
     private Account account;
