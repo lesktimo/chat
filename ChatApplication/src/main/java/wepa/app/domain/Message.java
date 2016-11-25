@@ -7,16 +7,21 @@ package wepa.app.domain;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Message extends AbstractPersistable<Long>{
-    
+public class Message extends AbstractPersistable<Long> {
+
     private Timestamp timestamp;
     private String content;
+
+
+
     @ManyToOne
     private Account account;
     
@@ -46,7 +51,5 @@ public class Message extends AbstractPersistable<Long>{
     public void setAccount(Account account) {
         this.account = account;
     }
-    
-    
-    
+
 }
