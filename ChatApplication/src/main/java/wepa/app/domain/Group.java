@@ -8,6 +8,7 @@ package wepa.app.domain;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -17,8 +18,13 @@ public class Group extends AbstractPersistable<Long>{
     
     
     private List<Account> accounts;
-    @OneToMany(mappedBy= "group", fetch = FetchType.EAGER)
+    
+    @OneToMany
+    @JoinColumn
     private List<Message> messages;
+    
     private List<Tag> tags;
+    
+    
     
 }

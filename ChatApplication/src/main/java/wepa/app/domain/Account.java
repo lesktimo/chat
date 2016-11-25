@@ -5,10 +5,16 @@
  */
 package wepa.app.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Account extends AbstractPersistable<Long>{
+    
+    
+    @OneToMany(mappedBy = "account")
+    private List<Message> messages;
     
 }

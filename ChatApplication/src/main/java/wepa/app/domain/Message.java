@@ -7,6 +7,9 @@ package wepa.app.domain;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -14,7 +17,11 @@ public class Message extends AbstractPersistable<Long>{
     
     private Timestamp timestamp;
     private String content;
+    @ManyToOne
     private Account account;
+    
+    @ManyToOne
+    private Group group;
 
     public Timestamp getTimestamp() {
         return timestamp;
