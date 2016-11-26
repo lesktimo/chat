@@ -14,6 +14,7 @@ public class Message extends AbstractPersistable<Long> {
     private String content;
 
     @ManyToOne
+    @JoinColumn
     private Account account;
     
     @ManyToOne

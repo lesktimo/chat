@@ -1,8 +1,8 @@
-package wepa.app.repo;
+// package wepa.app.repo;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import wepa.app.domain.GroupAccount;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import wepa.app.domain.GroupAccount;
 
-public interface GroupAccountRepo extends JpaRepository<GroupAccount, Long> {
+// public interface GroupAccountRepo extends JpaRepository<GroupAccount, Long> {
 
-}
+// }

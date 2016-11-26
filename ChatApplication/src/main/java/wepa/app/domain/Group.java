@@ -6,34 +6,30 @@
 package wepa.app.domain;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.JoinColumn;
-
+import javax.persistence.Column;
 import javax.persistence.ManyToMany;
-
 import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Group extends AbstractPersistable<Long> {
 
-    private List<Account> accounts;
 
     
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+    @OneToMany
+    @JoinColumn
     private List<Message> messages;
     @ManyToMany(mappedBy = "groups")
     private List<Tag> tags;
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
+    
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
+    
 
     public List<Message> getMessages() {
         return messages;

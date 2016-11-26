@@ -6,14 +6,19 @@
 package wepa.app.domain;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Column;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Tag extends AbstractPersistable<Long> {
 
     private String tag;
+
+    
     @ManyToMany
     private List<Group> groups;
 
