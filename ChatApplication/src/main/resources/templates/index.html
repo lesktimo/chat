@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:fragment="base">
     <head>
         <title>Alien Invasion Tomato Monster Mexican Armada Brothers Who Are Just Regural Brothers Running In A Van From An Asteroid And All Sorts Of Things The Chat</title>
         <meta charset="UTF-8"/>
@@ -7,5 +7,8 @@
     </head>
     <body>
         <div>AITMABWAJRBRIAVFAAAASOTTC</div>
+        <h2>BASE CONTENT</h2>
+        
+        <div th:include="this :: content"/>
     </body>
 </html>
