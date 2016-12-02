@@ -8,7 +8,7 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String handleDefault() {
-        return "index";
+        return "groups";
     }
     
     @RequestMapping("/groups")
