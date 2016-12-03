@@ -17,7 +17,7 @@ function addMessage() {
 }
 
 function showNewMessage(message) {
-    $("<p/>").text(message.content).appendTo("#content");
+    $("<p/>").text(message.timestamp + " " + message.content).appendTo("#content");
 }
 
 function listMessages() {
@@ -32,6 +32,6 @@ function listMessages() {
 function showAllMessages(messages) {
     $("#content").empty();
     $.each(messages, function (i, item) {
-        $("<p/>").text(item.content).appendTo("#content");
+        $("<p/>").text(item.timestamp + " " + item.content).appendTo("#content");
     });
 }

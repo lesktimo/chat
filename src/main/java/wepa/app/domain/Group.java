@@ -26,6 +26,7 @@ public class Group extends AbstractPersistable<Long> {
     private List<Message> messages;
     @ManyToMany(mappedBy = "groups")
     private List<Tag> tags;
+    private String topic;
 
     
 
@@ -45,6 +46,14 @@ public class Group extends AbstractPersistable<Long> {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+    
+    public String getTopic() {
+        return topic;
+    }
+    
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
 
