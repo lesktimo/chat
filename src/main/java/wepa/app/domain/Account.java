@@ -12,7 +12,6 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "account")
     private List<Message> messages;
 
-
     private String username;
     private String password;
 
