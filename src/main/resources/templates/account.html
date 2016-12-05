@@ -6,14 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div th:fragment="content"><h2>EI BASE</h2>
-            <input type="text" id="group"/>
-            <input type="button" value="Send" onclick="addGroup();"/>
-
-            <script src="groups.js"></script>
+        <div th:fragment="content">
+            <span th:text="${account.username}">account name</span>
+            
+            <ul>
+                <li th:each="group : ${groups}">
+                    <span th:text="${group.name}">group name</span>
+                </li>
+            </ul>
         </div>
 
 
-    </body>
 
+        
+    </body>
 </html>
