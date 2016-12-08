@@ -1,7 +1,9 @@
 function addMessage() {
     var input = $("#message").val();
+    var time = new Date($.now());
     var dataToSend = JSON.stringify({
-        name: input
+        content: input,
+        timestamp: time 
     });
 
     var urlPath = window.location.pathname;

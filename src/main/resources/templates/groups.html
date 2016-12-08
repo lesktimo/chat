@@ -7,11 +7,25 @@
     </head>
     <body>
         <div th:fragment="content"><h2>EI BASE</h2>
-            <input type="text" id="group"/>
-            <input type="button" value="Send" onclick="addGroup();"/>
 
+            <ul>
+                <li th:each="group : ${groups}">
+                    <span th:text="${group.name}">group name</span>
+                </li>
+            </ul>
+
+            <form  action="${/groups}" method="POST">
+                <input type="text" id="group"/>
+                <div>
+                    <select  name="tagList" multiple="">  
+                        <option th:each="t : ${tags}" value="${t.tag}"></option>  
+                    </select>
+                </div>
+                <input type="button" value="Send" onclick="addGroup();"/>
+            </form>
             <script src="groups.js"></script>
         </div>
+
 
 
     </body>

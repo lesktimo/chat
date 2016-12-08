@@ -1,7 +1,7 @@
 function addGroup() {
     var input = $("#group").val();
     var dataToSend = JSON.stringify({
-        name: input
+        topic: input
     });
     
     $.ajax({
