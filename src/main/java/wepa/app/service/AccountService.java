@@ -1,14 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wepa.app.service;
 
-/**
- *
- * @author lesktimo
- */
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import wepa.app.domain.Account;
+
+@Service
 public class AccountService {
-    
+
+    @Autowired
+    private HttpSession session;
+
+    public void setAccount(Account account) {
+        session.setAttribute("account", account);
+    }
+
+    public Account getAccount() {
+        return (Account) session.getAttribute("account");
+    }
 }
