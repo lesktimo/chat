@@ -1,4 +1,4 @@
-package controller;
+package wepa.app.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import wepa.app.controller.ChatController;
 import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ChatController.class)
+@SpringBootTest
 public class ChatControllerTest {
 
     @Autowired
@@ -45,6 +44,7 @@ public class ChatControllerTest {
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
         groupRepo.deleteAll();
+        messageRepo.deleteAll();
         
         testGroup = new ChatGroup();
         testGroup.setTopic("chatti");
@@ -73,8 +73,7 @@ public class ChatControllerTest {
 
     @Test
     public void postAddsGroupToDatabase() throws Exception {
-        mockMvc.perform(post("/groups").param("group", "chatti"))
-                .andExpect(redirectedUrl("/groups"));
+        mockMvc.perform(post("/groups").param("group", "chatti"));
 
         List<ChatGroup> groups = groupRepo.findAll();
         assertEquals("chatti", groups.get(0).getTopic());
