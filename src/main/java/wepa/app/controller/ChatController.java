@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
-import wepa.app.domain.Tag;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
-import wepa.app.repo.TagRepo;
 import wepa.app.service.AccountService;
+import wepa.app.service.ChatGroupService;
 
 @Controller
 @RequestMapping(value = "/groups")
@@ -29,26 +28,29 @@ public class ChatController {
 
     @Autowired
     private MessageRepo messageRepo;
-
-    @Autowired
-    private TagRepo tagRepo;
     
     @Autowired
     private AccountService accountService;
+    
+    @Autowired
+    private ChatGroupService chatGroupService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
         model.addAttribute("groups", groupRepo.findAll());
-        model.addAttribute("tags", tagRepo.findAll());
+        long apu = groupRepo.count();
+        model.addAttribute("apu", apu);
+        
         return "groups";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addGroup(@RequestParam String topic, @RequestParam List<Tag> tagList) {
+    public String addGroup(@RequestParam String topic, @RequestParam String tags) {
         ChatGroup group = new ChatGroup();
         group.setTopic(topic);
-        group.setTags(tagList);
-        group.getParticipants().add(accountService.getAccount());
+        group.setTags(chatGroupService.createTags(tags));
+        //group.getParticipants().add(accountService.getAccount());
+        groupRepo.save(group);
         return "redirect:/groups";
     }
 

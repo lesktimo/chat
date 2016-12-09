@@ -1,5 +1,6 @@
 package wepa.app.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,10 +14,11 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @OneToMany
     @JoinColumn
     private List<Message> messages;
-    @ManyToMany(mappedBy = "groups")
-    private List<Tag> tags;
+    
+    
+    private ArrayList<String> tags;
     private String topic;
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "chatgroups")
     private List<Account> participants;
 
     public List<Message> getMessages() {
@@ -27,13 +29,15 @@ public class ChatGroup extends AbstractPersistable<Long> {
         this.messages = messages;
     }
 
-    public List<Tag> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
+
+    
 
     public String getTopic() {
         return topic;
