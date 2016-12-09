@@ -1,4 +1,3 @@
-
 package wepa.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,15 @@ import wepa.app.repo.AccountRepo;
 @Controller
 @RequestMapping("/accounts")
 public class AccountController {
-    
+
     @Autowired
     private AccountRepo accountRepo;
-    
-    
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public String getAccount(@PathVariable Long id, Model model){
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getAccount(@PathVariable Long id, Model model) {
         model.addAttribute("account", accountRepo.findOne(id));
-        
-                
-        return null;}
+
+        return null;
+    }
+    
 }
