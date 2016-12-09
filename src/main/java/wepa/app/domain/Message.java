@@ -17,7 +17,7 @@ public class Message extends AbstractPersistable<Long> {
     private Account account;
 
     @ManyToOne
-    private Group group;
+    private ChatGroup group;
 
     public Timestamp getTimestamp() {
         return timestamp;

@@ -11,7 +11,7 @@ public class Tag extends AbstractPersistable<Long> {
     private String tag;
 
     @ManyToMany
-    private List<Group> groups;
+    private List<ChatGroup> groups;
 
     public String getTag() {
         return tag;
@@ -21,11 +21,11 @@ public class Tag extends AbstractPersistable<Long> {
         this.tag = tag;
     }
 
-    public List<Group> getGroups() {
+    public List<ChatGroup> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(List<ChatGroup> groups) {
         this.groups = groups;
     }
 

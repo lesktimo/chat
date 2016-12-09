@@ -1,5 +1,6 @@
 package wepa.app.controller;
 
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import wepa.app.domain.Group;
+import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
 import wepa.app.domain.Tag;
 import wepa.app.repo.GroupRepo;
@@ -44,7 +45,7 @@ public class ChatController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String addGroup(@RequestParam String topic, @RequestParam List<Tag> tagList) {
-        Group group = new Group();
+        ChatGroup group = new ChatGroup();
         group.setTopic(topic);
         group.setTags(tagList);
         group.getParticipants().add(accountService.getAccount());
@@ -53,15 +54,15 @@ public class ChatController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Group deleteGroup(@PathVariable Long id) {
-        Group g = groupRepo.getOne(id);
+    public ChatGroup deleteGroup(@PathVariable Long id) {
+        ChatGroup g = groupRepo.getOne(id);
         groupRepo.delete(g);
         return g;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> listMessages(@PathVariable Long id) {
+    public Collection<Message> listMessages(@PathVariable Long id) {
         return groupRepo.findOne(id).getMessages();
     }
 
