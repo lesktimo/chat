@@ -1,5 +1,6 @@
 package wepa.app.controller;
 
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,7 @@ public class ChatController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Message> listMessages(@PathVariable Long id) {
+    public Collection<Message> listMessages(@PathVariable Long id) {
         return groupRepo.findOne(id).getMessages();
     }
 
