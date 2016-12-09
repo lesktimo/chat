@@ -42,5 +42,13 @@ public class Message extends AbstractPersistable<Long> {
     public void setAccount(Account account) {
         this.account = account;
     }
+    
+    public Group getGroup() {
+        return this.group;
+    }
+    
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
 }
