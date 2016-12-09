@@ -16,13 +16,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import wepa.app.domain.Group;
+import wepa.app.controller.ChatController;
+import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = ChatController.class)
 public class ChatControllerTest {
 
     @Autowired
@@ -35,7 +36,7 @@ public class ChatControllerTest {
     private MessageRepo messageRepo;
 
     private MockMvc mockMvc;
-    private Group testGroup;
+    private ChatGroup testGroup;
 
     public ChatControllerTest() {
     }
@@ -45,9 +46,8 @@ public class ChatControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
         groupRepo.deleteAll();
         
-        testGroup = new Group();
+        testGroup = new ChatGroup();
         testGroup.setTopic("chatti");
-
     }
 
     @Test
@@ -60,13 +60,13 @@ public class ChatControllerTest {
     public void existingGroupsAreListed() throws Exception {
 
         for (int i = 0; i <= 3; i++) {
-            Group group = new Group();
+            ChatGroup group = new ChatGroup();
             group.setTopic("ryhmä" + i);
             groupRepo.save(group);
         }
 
         MvcResult res = mockMvc.perform(get("/groups")).andReturn();
-        List<Group> groups = (List) res.getModelAndView().getModel().get("groups");
+        List<ChatGroup> groups = (List) res.getModelAndView().getModel().get("groups");
 
         assertEquals(3, groups.size());
     }
@@ -76,13 +76,13 @@ public class ChatControllerTest {
         mockMvc.perform(post("/groups").param("group", "chatti"))
                 .andExpect(redirectedUrl("/groups"));
 
-        List<Group> groups = groupRepo.findAll();
+        List<ChatGroup> groups = groupRepo.findAll();
         assertEquals("chatti", groups.get(0).getTopic());
     }
 
     @Test
     public void messagesAreListedInAGroup() throws Exception {
-        Group group = groupRepo.save(testGroup);
+        ChatGroup group = groupRepo.save(testGroup);
         createGroupAndACoupleMessages(group);
         
         MvcResult res = mockMvc.perform(get("/groups/" + group.getId())).andReturn();
@@ -93,7 +93,7 @@ public class ChatControllerTest {
     
     @Test
     public void postAddsMessageToGroup() throws Exception {
-        Group group = groupRepo.save(testGroup);
+        ChatGroup group = groupRepo.save(testGroup);
         mockMvc.perform(post("/groups/" + group.getId()).param("message", "viesti"));
         
         List<Message> messages = messageRepo.findAll();
@@ -102,7 +102,7 @@ public class ChatControllerTest {
         
     }
 
-    private void createGroupAndACoupleMessages(Group group) {
+    private void createGroupAndACoupleMessages(ChatGroup group) {
         
         for (int i = 0; i <= 3; i++) {
             Message msg = new Message();
