@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Group extends AbstractPersistable<Long> {
+public class ChatGroup extends AbstractPersistable<Long> {
 
     @OneToMany
     @JoinColumn

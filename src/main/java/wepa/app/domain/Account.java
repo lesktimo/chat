@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany
-    private List<Group> groups;
+    private List<ChatGroup> groups;
 
     @OneToMany(mappedBy = "account")
     private List<Message> messages;
