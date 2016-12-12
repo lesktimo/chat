@@ -2,7 +2,6 @@ package wepa.app.ui;
 
 import org.fluentlenium.adapter.FluentTest;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -45,9 +44,22 @@ public class ChatTest extends FluentTest {
 //        assertFalse(pageSource().contains("Ryhmä1"));
 //
 //        fill(find("#topic")).with("Ryhmä1");
+//        fill(find("#tags")).with("tagi1, tagi2");
 //        submit(find("form").first());
 //
 //        assertTrue(pageSource().contains("Ryhmä1"));
+//    }
+//    
+//    @Test
+//    public void groupWithEmptyTopicCannotBeAdded() {
+//        goTo(baseUrl);
+//        $("a", withText("Groups")).click();
+//        assertFalse(pageSource().contains("Ryhmä1"));
+//
+//        fill(find("#tags")).with("tagi");
+//        submit(find("form").first());
+//
+//        assertFalse(pageSource().contains("Ryhmä1"));
 //    }
 //
 //    @Test

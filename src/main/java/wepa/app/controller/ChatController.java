@@ -45,7 +45,7 @@ public class ChatController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addGroup(@RequestParam String topic, @RequestParam String tags) {
+    public String addGroup(@RequestParam("topic") String topic, @RequestParam("tags") String tags) {
         ChatGroup group = new ChatGroup();
         group.setTopic(topic);
         group.setTags(chatGroupService.createTags(tags));

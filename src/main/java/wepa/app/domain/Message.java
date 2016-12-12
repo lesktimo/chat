@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Message extends AbstractPersistable<Long> {
 
     private Timestamp timestamp;
+    
     private String content;
 
     @ManyToOne
