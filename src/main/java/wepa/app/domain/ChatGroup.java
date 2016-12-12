@@ -2,10 +2,12 @@ package wepa.app.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -15,9 +17,12 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @JoinColumn
     private List<Message> messages;
     
-    
     private ArrayList<String> tags;
+    
+    @NotNull
+    @Column(unique = true)
     private String topic;
+    
     @ManyToMany(mappedBy = "chatgroups")
     private List<Account> participants;
 
@@ -36,8 +41,6 @@ public class ChatGroup extends AbstractPersistable<Long> {
     public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
-
-    
 
     public String getTopic() {
         return topic;

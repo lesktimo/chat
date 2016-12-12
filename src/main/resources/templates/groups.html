@@ -13,7 +13,9 @@
             <p th:text="${apu}"></p>
             
             <ul>
-                <li th:each="group : ${groups}" th:text="${group.topic}"> group name </li>
+                <li th:each="group : ${groups}">
+                    <a th:href="@{groups/{groupId}(groupId=${group.id})}" th:text="${group.topic}">group topic</a>
+                </li>
             </ul>
 
 

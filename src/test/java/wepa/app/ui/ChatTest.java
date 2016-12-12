@@ -30,7 +30,7 @@ public class ChatTest extends FluentTest {
 
     @Before
     public void setUp() {
-        baseUrl = "http://localhost:8080/" + port;
+        baseUrl = "http://localhost:" + port;
     }
     
     @Test
@@ -44,7 +44,7 @@ public class ChatTest extends FluentTest {
 //        $("a", withText("Groups")).click();
 //        assertFalse(pageSource().contains("Ryhmä1"));
 //
-//        fill(find("#group")).with("Ryhmä1");
+//        fill(find("#topic")).with("Ryhmä1");
 //        submit(find("form").first());
 //
 //        assertTrue(pageSource().contains("Ryhmä1"));
