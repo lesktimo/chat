@@ -17,7 +17,6 @@ import wepa.app.domain.Message;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 import wepa.app.service.AccountService;
-import wepa.app.service.ChatGroupService;
 
 @Controller
 @RequestMapping(value = "/groups")
@@ -31,9 +30,6 @@ public class ChatController {
     
     @Autowired
     private AccountService accountService;
-    
-    @Autowired
-    private ChatGroupService chatGroupService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
@@ -45,11 +41,9 @@ public class ChatController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addGroup(@RequestParam("topic") String topic, @RequestParam("tags") String tags) {
+    public String addGroup(@RequestParam("topic") String topic) {
         ChatGroup group = new ChatGroup();
         group.setTopic(topic);
-        group.setTags(chatGroupService.createTags(tags));
-        //group.getParticipants().add(accountService.getAccount());
         groupRepo.save(group);
         return "redirect:/groups";
     }
@@ -64,16 +58,21 @@ public class ChatController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Collection<Message> listMessages(@PathVariable Long id) {
-        return groupRepo.findOne(id).getMessages();
+    public String getGroup(Model model, @PathVariable Long id) {
+        model.addAttribute("messages", groupRepo.findOne(id).getMessages());
+        return "chat";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+   @RequestMapping(value = "/{id}", method = RequestMethod.POST,
+             consumes = "application/json", produces = "application/json")
     @ResponseBody
     public Message addMessage(@RequestBody Message message, @PathVariable Long id) {
-        groupRepo.findOne(id).getMessages().add(message);
-        messageRepo.save(message);
-        return message;
+        ChatGroup group = groupRepo.findOne(id);
+        message.setGroup(group);
+        group.getMessages().add(message);
+        groupRepo.save(group);
+        
+        return messageRepo.save(message);
     }
 
 }

@@ -10,11 +10,11 @@ public class DefaultController {
     public String handleDefault() {
         return "groups";
     }
-    
-    @RequestMapping("/groups")
-    public String getGropus() {
-        return "groups";
-    }
+//    
+//    @RequestMapping("/groups")
+//    public String getGropus() {
+//        return "groups";
+//    }
     
     
 }

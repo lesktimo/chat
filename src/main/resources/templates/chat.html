@@ -7,15 +7,21 @@
     </head>
     <body>
         <div th:fragment="content">
-            
-            
+            <div id="messages">
+                <div th:each="message : ${messages}">
+                    <p th:text="${message.content}"></p>
+                </div>
+            </div>   
+
             <input type="text" id="message"/>
             <input type="button" value="Send" onclick="addMessage();"/>
+            
+            
             <script src="chat.js"></script>
         </div>
 
 
 
-        
+
     </body>
 </html>

@@ -1,6 +1,6 @@
 function addMessage() {
     var input = $("#message").val();
-    var time = new Date($.now());
+    var time = new Timestamp($.now());
     var dataToSend = JSON.stringify({
         content: input,
         timestamp: time 
@@ -20,20 +20,4 @@ function addMessage() {
 
 function showNewMessage(message) {
     $("<p/>").text(message.timestamp + " " + message.content).appendTo("#content");
-}
-
-function listMessages() {
-    var urlPath = window.location.pathname;
-
-    $.ajax({
-        url: "http://localhost:8080/" + urlPath,
-        success: showAllMessages
-    });
-}
-
-function showAllMessages(messages) {
-    $("#content").empty();
-    $.each(messages, function (i, item) {
-        $("<p/>").text(item.timestamp + " " + item.content).appendTo("#content");
-    });
 }

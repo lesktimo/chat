@@ -17,8 +17,6 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @JoinColumn
     private List<Message> messages;
     
-    private ArrayList<String> tags;
-    
     @NotNull
     @Column(unique = true)
     private String topic;
@@ -32,14 +30,6 @@ public class ChatGroup extends AbstractPersistable<Long> {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
     }
 
     public String getTopic() {

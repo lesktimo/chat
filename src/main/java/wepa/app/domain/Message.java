@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -18,6 +19,7 @@ public class Message extends AbstractPersistable<Long> {
     private Account account;
 
     @ManyToOne
+    @NotNull
     private ChatGroup group;
 
     public Timestamp getTimestamp() {

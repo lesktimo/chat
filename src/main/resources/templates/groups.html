@@ -27,18 +27,12 @@
                             <td><input type="text" name="topic" th:field="*{topic}"/></td>
                             <td th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}">Aihe ei voi olla tyhjä.</td>
                         </tr>
-
-                        <tr>
-                            <td>Tagit:</td>
-                            <td><input type="text" name="tags"/>  Erottele tagit toisistaan pilkulla <br/></td>
-                        </tr>
                         <tr>
                             <td><input type="submit" value="Send"/></td>
                         </tr>
                     </table>
                 </form>
             </div>
-            <!--            <script src="groups.js"></script>-->
 
         </div>
 
