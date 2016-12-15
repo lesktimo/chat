@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Profile("Production")
+@Profile("production")
 @Configuration
 @EnableWebSecurity
 public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapter {
