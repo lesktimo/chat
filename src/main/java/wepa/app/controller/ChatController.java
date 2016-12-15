@@ -27,7 +27,7 @@ public class ChatController {
 
     @Autowired
     private MessageRepo messageRepo;
-    
+
     @Autowired
     private AccountService accountService;
 
@@ -36,7 +36,7 @@ public class ChatController {
         model.addAttribute("groups", groupRepo.findAll());
         long apu = groupRepo.count();
         model.addAttribute("apu", apu);
-        
+
         return "groups";
     }
 
@@ -57,21 +57,20 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public String getGroup(Model model, @PathVariable Long id) {
         model.addAttribute("messages", groupRepo.findOne(id).getMessages());
         return "chat";
     }
 
-   @RequestMapping(value = "/{id}", method = RequestMethod.POST,
-             consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST,
+            consumes = "application/json", produces = "application/json")
     @ResponseBody
     public Message addMessage(@RequestBody Message message, @PathVariable Long id) {
         ChatGroup group = groupRepo.findOne(id);
         message.setGroup(group);
         group.getMessages().add(message);
         groupRepo.save(group);
-        
+
         return messageRepo.save(message);
     }
 

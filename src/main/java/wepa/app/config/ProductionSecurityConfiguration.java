@@ -22,10 +22,10 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resourses/**").permitAll()
+                .antMatchers("/resources/**", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll().loginPage("/login").successForwardUrl("/groups")
+                .formLogin().loginPage("/login").permitAll().successForwardUrl("/groups")
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/login?logout");
     }

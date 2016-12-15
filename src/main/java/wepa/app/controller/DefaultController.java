@@ -1,3 +1,4 @@
+
 package wepa.app.controller;
 
 import org.springframework.stereotype.Controller;
@@ -8,15 +9,6 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String handleDefault() {
-        return "groups";
+        return "redirect:/groups";
     }
-//    
-//    @RequestMapping("/groups")
-//    public String getGropus() {
-//        return "groups";
-//    }
-    
-    
 }
-
-

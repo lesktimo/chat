@@ -1,21 +1,34 @@
+
 package wepa.app.service;
 
-import javax.servlet.http.HttpSession;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import wepa.app.domain.Account;
+import wepa.app.repo.AccountRepo;
+import wepa.app.repo.RoleRepo;
 
 @Service
 public class AccountService {
 
     @Autowired
-    private HttpSession session;
+    private AccountRepo accRepo;
 
-    public void setAccount(Account account) {
-        session.setAttribute("account", account);
+    @Autowired
+    private RoleRepo roleRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder bCrypt;
+
+    public void save(Account acc) {
+        acc.setPassword(bCrypt.encode(acc.getPassword()));
+        acc.setRoles(new HashSet<>(roleRepo.findAll()));
+        accRepo.save(acc);
     }
 
-    public Account getAccount() {
-        return (Account) session.getAttribute("account");
+    public Account findByUsername(String username) {
+        return accRepo.findByUsername(username);
     }
+
 }
