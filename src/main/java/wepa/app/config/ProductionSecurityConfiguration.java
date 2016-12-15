@@ -25,7 +25,9 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .antMatchers("/resources/**", "/reg").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll().successForwardUrl("/groups")
+                .formLogin()
+//                .loginPage("/login")
+                .permitAll().successForwardUrl("/groups")
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/login?logout");
     }
