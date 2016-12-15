@@ -3,6 +3,7 @@ package wepa.app.service;
 
 import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import wepa.app.domain.Account;
@@ -18,11 +19,9 @@ public class AccountService {
     @Autowired
     private RoleRepo roleRepo;
 
-    @Autowired
-    private BCryptPasswordEncoder bCrypt;
 
     public void save(Account acc) {
-        acc.setPassword(bCrypt.encode(acc.getPassword()));
+        acc.setPassword(passwordEncoder().encode(acc.getPassword()));
         acc.setRoles(new HashSet<>(roleRepo.findAll()));
         accRepo.save(acc);
     }
@@ -31,4 +30,8 @@ public class AccountService {
         return accRepo.findByUsername(username);
     }
 
+     @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
