@@ -8,7 +8,7 @@
     <body>
         <div th:fragment="content">
 
-            <form th:action="@{/account/register}" method="POST">
+            <form th:action="@{/reg}" method="POST">
                 <h2 class="form-signin-heading">Register</h2>
                 <spring:bind path="username">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
