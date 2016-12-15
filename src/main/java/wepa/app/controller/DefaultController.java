@@ -9,6 +9,6 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String handleDefault() {
-        return "redirect:/groups";
+        return "redirect:/account/register";
     }
 }
