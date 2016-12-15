@@ -9,6 +9,6 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String handleDefault() {
-        return "redirect:/account/register";
+        return "redirect:/reg";
     }
 }

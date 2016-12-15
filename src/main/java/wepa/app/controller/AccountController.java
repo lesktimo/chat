@@ -14,7 +14,6 @@ import wepa.app.repo.AccountRepo;
 import wepa.app.service.AccountService;
 
 @Controller
-@RequestMapping("/account")
 public class AccountController {
 
     @Autowired
@@ -23,29 +22,25 @@ public class AccountController {
     @Autowired
     private AccountService accService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public String getAccount(@PathVariable Long id, Model model) {
         model.addAttribute("account", accountRepo.findOne(id));
 
         return null;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registration(Model model) {
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public String registrationGet(Model model) {
         model.addAttribute("accountForm", new Account());
-
         return "register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registration(@Valid @ModelAttribute("accountForm") Account accountForm, BindingResult bindingResult) {
-
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    public String registrationPost(@Valid @ModelAttribute("accountForm") Account accountForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-
         accService.save(accountForm);
-
         return "redirect:/login";
     }
 }
