@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -56,6 +57,7 @@ public class ChatControllerTest {
 
     @Test
     public void postAddsGroupToDatabase() throws Exception {
+
 //        mockMvc.perform(post("/groups").param("topic", chatTopic));
 //
 //        List<ChatGroup> groups = groupRepo.findAll();
@@ -63,6 +65,7 @@ public class ChatControllerTest {
 //        assertEquals(chatTopic, groups.get(0).getTopic());
 //        
 //        mockMvc.perform(get("/groups/" + groups.get(0).getId())).andExpect(status().isOk());
+
     }
 
 //    @Test
@@ -76,7 +79,7 @@ public class ChatControllerTest {
 //        
 //        mockMvc.perform(post("/groups/" + group.getId())
 //                .contentType("application/json").content(jsonMessage));
-//
+//        
 //        List<Message> messages = messageRepo.findAll();
 //
 //        assertEquals(1, messages.size());
