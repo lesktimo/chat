@@ -4,24 +4,52 @@
         <title>Alien Invasion Tomato Monster Mexican Armada Brothers Who Are Just Regural Brothers Running In A Van From An Asteroid And All Sorts Of Things The Chat</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="chat.js"></script>
     </head>
     <body>
         <div th:fragment="content">
             <div id="messages">
-                <div th:each="message : ${messages}">
-                    <p th:text="${message.content}"></p>
-                </div>
+                <p>Viestit tänne</p>
             </div>   
 
-            <input type="text" id="message"/>
-            <input type="button" value="Send" onclick="addMessage();"/>
+            <textarea rows="3" cols="50" id="message"></textarea>
+            <button id="nappi">Send!</button>
+            
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $("#nappi").click(function(){
+                        var message = $("#message").val();
+                        var old = $("#messages").html();
+                        var urlPath = window.location.href;
+                        $("#messages").html(old + '<p>' + message + '</p>');
+                        $("#message").val('');
+
+                        // var urlPath = window.location.href;
+                        // alert("hello");
+                        // var dataToSend = JSON.stringify({
+                        //     content: $("#message").val(),
+                        //     timestamp: $.now()
+                        // });
+
+                        // $.ajax({
+                        //     url: urlPath,
+                        //     dataType: 'json',
+                        //     contentType:'application/json; charset=utf-8',
+                        //     type: 'post',
+                        //     data: dataToSend
+                        //     success: showMessage
+                        // });
+                                
+                    });
+
+                
+
+                });
+            </script>
             
             
-            <script src="chat.js"></script>
         </div>
-
-
-
-
     </body>
 </html>
