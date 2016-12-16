@@ -21,7 +21,7 @@ public class AccountController {
 
     @Autowired
     private AccountService accService;
-    
+
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public String getAccount(@PathVariable Long id, Model model) {
         model.addAttribute("account", accountRepo.findOne(id));
@@ -42,5 +42,10 @@ public class AccountController {
         }
         accService.save(account);
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGet() {
+        return "login";
     }
 }
