@@ -10,60 +10,53 @@
     <body>
         <div th:fragment="content">
             <div id="messages">
-                <p>Viestit tänne</p>
-            </div>   
+                <p th:each="message: ${messages}" th:text="${message}"></p>
+            </div> 
 
             <textarea rows="3" cols="50" id="message"></textarea>
-            <button id="nappi">Send!</button>
+            <button id="nappi" onclick="send();">Send!</button>
 
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("#nappi").click(function () {
-                        var message = $("#message").val();
-                        var old = $("#messages").html();
+            <script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+            <script type="text/javascript" th:inline="javascript">
+                        var account = [[${account}]];
+                        var accountName = [[${account.username}]];
+                        var group = $[[{group}]];
+                        var groupId = $[[{group.id}]];
                         var urlPath = window.location.href;
 
 
 
-                        var client = Stomp.over(new SockJS('/groups'));
+                        var client = Stomp.over(new SockJS('/rek'));
+                        client.connect({}, function (frame) {
+                            var subscribeTo = '/groups/' + groupId;
+                            client.subscribe(subscribeTo, function (response) {
+                                displayMessage(JSON.parse(response.body));
+                            });
+                        });
 
 
                         function send() {
-                            client.send(urlPath, {}, JSON.stringify({"message": message}));
-                            $("#messages").html(old + '<p>' + message + '</p>');
+                            client.send("chat/messages", {}, JSON.stringify({'content' : $("#message").val(), 'account': account, 'group': group }));
+                        }
+                        
+                        function displayMessage (message) {
+                            var old = $("#messages").html();
+                            $("#messages").html( '<p>'+ accountName + ": " + message.content + '</p>' + old);
                             $("#message").val('');
                         }
 
 
-                        client.connect({}, function (frame) {
-                            client.subscribe('channel', function (response) {
-                                alert(response);
-                            });
-                        });
+                        
 
                         window.onbeforeunload = function () {
                             client.disconnect();
+                            client.close();
                         }
 
-                        // var urlPath = window.location.href;
-                        // alert("hello");
-                        // var dataToSend = JSON.stringify({
-                        //     "content": $("#message").val(),
-                        //     "timestamp": $.now()
-                        // });
 
-                        // $.ajax({
-                        //     url: urlPath,
-                        //     dataType: 'json',
-                        //     contentType:'application/json; charset=utf-8',
-                        //     type: 'post',
-                        //     data: dataToSend
-                        //     success: showMessage
-                        // });
-
-                    });
-                });
+                    
+              
             </script>
 
 

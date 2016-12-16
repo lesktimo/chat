@@ -18,12 +18,12 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/groups");
-        config.setApplicationDestinationPrefixes("/groups");
+        config.setApplicationDestinationPrefixes("/chat");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry ser) {
-        ser.addEndpoint("/groups").withSockJS();
+        ser.addEndpoint("/rek").withSockJS();
     }
 
 }

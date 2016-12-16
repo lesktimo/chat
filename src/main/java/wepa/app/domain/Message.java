@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Message extends AbstractPersistable<Long> {
 
-    
+
     private String content;
 
     @ManyToOne
