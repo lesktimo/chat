@@ -20,18 +20,22 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
 
     @Autowired
     private AccountService accService;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**", "/reg", "/index").permitAll()
+                //resurssit, rekisesteröintisivu ja index auki kaikille  
+                .antMatchers("/resources/**", "/css/**", "/reg", "/index").permitAll()
+                //kaikki muut sivut vaativat autentikaation
                 .anyRequest().authenticated()
+                //login-sivun määreet
                 .and()
-                .formLogin()
-//                .loginPage("/login")
-                .permitAll().successForwardUrl("/groups")
+                .formLogin().loginPage("/login")
+                .permitAll()
+                //logout määreet
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/login");
+                .logout().permitAll()
+                .logoutSuccessUrl("/login?logout");
     }
 
     @Autowired

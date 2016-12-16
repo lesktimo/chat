@@ -30,15 +30,20 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
 
         http.authorizeRequests()
-                .antMatchers("/resources/**", "/reg", "/console/*", "/index").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-//                .loginPage("/login")
+                //resurssit, rekisesteröintisivu, h2-console ja index auki kaikille     
+                .antMatchers(
+                        "/resources/**", "/css/**", "/reg", "/console/*", "/index")
                 .permitAll()
+                //kaikki muut sivut vaativat autentikaation
+                .anyRequest().authenticated()
+                //login-sivun määreet
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/login?");
-//                .anyRequest().permitAll();
+                .formLogin().loginPage("/login")
+                .permitAll()
+                //logout määreet
+                .and()
+                .logout().permitAll()
+                .logoutSuccessUrl("/login?logout");
     }
 
     @Autowired
