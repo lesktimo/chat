@@ -7,5 +7,5 @@ import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
-    List<Message> findByGroup(ChatGroup group);
+    List<Message> findByGroupId(Long groupId);
 }

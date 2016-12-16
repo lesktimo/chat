@@ -1,4 +1,3 @@
-
 package wepa.app.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -12,14 +11,14 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/groups");
-        config.setApplicationDestinationPrefixes("/chat");
+    public void registerStompEndpoints(StompEndpointRegistry ser) {
+        ser.addEndpoint("/register").withSockJS();
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry ser) {
-        ser.addEndpoint("/rek").withSockJS();
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        config.setApplicationDestinationPrefixes("/ws");
+        config.enableSimpleBroker("/channel");
     }
 
 }

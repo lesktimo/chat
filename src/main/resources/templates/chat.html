@@ -14,52 +14,48 @@
                 <p th:each="message: ${messages}" th:text="${message}"></p>
             </div> 
 
+
             <textarea rows="3" cols="50" id="message"></textarea>
 
-            <button id="nappi" onclick="send();">Send!</button>
+            <input id="nappi" type="button"  value="Send!"/>
 
             <script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
             <script type="text/javascript" th:inline="javascript">
-                        var account = [[${account}]];
-                        var accountName = [[${account.username}]];
-                        var group = $[[{group}]];
-                        var groupId = $[[{group.id}]];
+                var client = null;
+                var username = [[${username}]];
+                
+                client = Stomp.over(new SockJS('/register'));
+                client.connect({}, function (frame) {
+                    var subscribeTo = '/channel/1';
+                    client.subscribe(subscribeTo, function (response) {
+                        displayMessage(JSON.parse(response.body));
+                    });
+                });
 
-                        var urlPath = window.location.href;
-
-
-
-                        var client = Stomp.over(new SockJS('/rek'));
-                        client.connect({}, function (frame) {
-                            var subscribeTo = '/groups/' + groupId;
-                            client.subscribe(subscribeTo, function (response) {
-                                displayMessage(JSON.parse(response.body));
-                            });
-                        });
+                $("#nappi").click(function () {
+                    client.send("ws/messages", {}, JSON.stringify({'content': $("#message").val(), 'username': username, 'groupId': '1'}));
+                })
 
 
-                        function send() {
-                            client.send("chat/messages", {}, JSON.stringify({'content' : $("#message").val(), 'account': account, 'group': group }));
-                        }
-                        
-                        function displayMessage (message) {
-                            var old = $("#messages").html();
-                            $("#messages").html( '<p>'+ accountName + ": " + message.content + '</p>' + old);
-                            $("#message").val('');
-                        }
+                function displayMessage(message) {
+                    var paragraph = document.createElement("p");
+                    var textNode = document.createTextNode(message.username + ": " + message.content);
+                    paragraph.appendChild(textNode);
+                    document.getElementById("messages").appendChild(paragraph);
+                }
 
 
-                        
-
-                        window.onbeforeunload = function () {
-                            client.disconnect();
-                            client.close();
-                        }
 
 
-                    
-              
+                window.onbeforeunload = function () {
+                    client.disconnect();
+                    client.close();
+                }
+
+
+
+
             </script>
 
 
