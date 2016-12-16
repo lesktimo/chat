@@ -21,7 +21,7 @@ public class AccountController {
 
     @Autowired
     private AccountService accService;
-
+    
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public String getAccount(@PathVariable Long id, Model model) {
         model.addAttribute("account", accountRepo.findOne(id));
@@ -31,16 +31,16 @@ public class AccountController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public String registrationGet(Model model) {
-        model.addAttribute("accountForm", new Account());
+        model.addAttribute("account", new Account());
         return "register";
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public String registrationPost(@Valid @ModelAttribute("accountForm") Account accountForm, BindingResult bindingResult) {
+    public String registrationPost(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        accService.save(accountForm);
+        accService.save(account);
         return "redirect:/login";
     }
 }
