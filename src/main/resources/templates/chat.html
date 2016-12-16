@@ -15,22 +15,42 @@
 
             <textarea rows="3" cols="50" id="message"></textarea>
             <button id="nappi">Send!</button>
-            
+
 
             <script type="text/javascript">
-                $(document).ready(function(){
-                    $("#nappi").click(function(){
+                $(document).ready(function () {
+                    $("#nappi").click(function () {
                         var message = $("#message").val();
                         var old = $("#messages").html();
                         var urlPath = window.location.href;
-                        $("#messages").html(old + '<p>' + message + '</p>');
-                        $("#message").val('');
+
+
+
+                        var client = Stomp.over(new SockJS('/groups'));
+
+
+                        function send() {
+                            client.send(urlPath, {}, JSON.stringify({"message": message}));
+                            $("#messages").html(old + '<p>' + message + '</p>');
+                            $("#message").val('');
+                        }
+
+
+                        client.connect({}, function (frame) {
+                            client.subscribe('channel', function (response) {
+                                alert(response);
+                            });
+                        });
+
+                        window.onbeforeunload = function () {
+                            client.disconnect();
+                        }
 
                         // var urlPath = window.location.href;
                         // alert("hello");
                         // var dataToSend = JSON.stringify({
-                        //     content: $("#message").val(),
-                        //     timestamp: $.now()
+                        //     "content": $("#message").val(),
+                        //     "timestamp": $.now()
                         // });
 
                         // $.ajax({
@@ -41,15 +61,12 @@
                         //     data: dataToSend
                         //     success: showMessage
                         // });
-                                
+
                     });
-
-                
-
                 });
             </script>
-            
-            
+
+
         </div>
     </body>
 </html>

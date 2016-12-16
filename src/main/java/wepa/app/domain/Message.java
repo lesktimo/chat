@@ -11,7 +11,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Message extends AbstractPersistable<Long> {
 
-    private Timestamp timestamp;
     
     private String content;
 
@@ -23,13 +22,7 @@ public class Message extends AbstractPersistable<Long> {
     @NotNull
     private ChatGroup group;
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
+ 
 
     public String getContent() {
         return content;
