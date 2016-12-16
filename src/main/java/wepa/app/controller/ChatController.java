@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import wepa.app.domain.Account;
 import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 import wepa.app.service.AccountService;
+import wepa.app.service.MessageService;
 
 @Controller
 @RequestMapping(value = "/groups")
@@ -32,6 +37,9 @@ public class ChatController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private MessageService messageService;
+    
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
         model.addAttribute("groups", groupRepo.findAll());
@@ -60,6 +68,12 @@ public class ChatController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getGroup(Model model, @PathVariable Long id) {
         model.addAttribute("messages", groupRepo.findOne(id).getMessages());
+        model.addAttribute("group", groupRepo.findOne(id));
+        
+        Authentication loggedIn = SecurityContextHolder.getContext().getAuthentication();
+        Account a = accountService.findByUsername(loggedIn.getName());
+        model.addAttribute("account", a);
+        
         return "chat";
     }
 
@@ -73,6 +87,11 @@ public class ChatController {
         groupRepo.save(group);
 
         return messageRepo.save(message);
+    }
+    
+    @MessageMapping("/messages")
+    public void handleMessage(Message message) throws Exception {
+        messageService.addMessage(message);
     }
 
 }

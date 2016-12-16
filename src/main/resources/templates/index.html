@@ -4,17 +4,27 @@
         <title>Alien Invasion Tomato Monster Mexican Armada Brothers Who Are Just Regural Brothers Running In A Van From An Asteroid And All Sorts Of Things The Chat</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="styles.css" type="text/css"/>
+        <link rel="stylesheet" href="css/styles.css" type="text/css"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="chat.js"></script>
+<!--        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script type="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>-->
+
     </head>
-    <body>
+
+
+    <body onload="document.LoginForm.username.focus();">
         <div class="navbar">
             <ul>
                 <li><a th:href="@{/groups}">Groups</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kirjaudu ulos</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/login}">Kirjaudu sisään</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/reg}">Rekisteröidy</a></li>
             </ul>
         </div>
-        
+
         <div th:include="this :: content"/>
     </body>
 </html>

@@ -7,8 +7,27 @@
     </head>
     <body>
         <div th:fragment="content">
-            
-            
+
+
+            <h3>Kirjaudu sisään</h3><form name='f' action='/login' method='POST'>
+                <fieldset>
+                    <legend>Kirjaudu sisään</legend>
+                    <div th:if="${param.error}" class="alert alert-error">    
+                        Väärä käyttäjänimi tai salasana!
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success"> 
+                        Olet kirjautunut ulos.
+                    </div>
+                    <label for="username">Käyttäjänimi</label>
+                    <input type="text" id="username" name="username"/>        
+                    <label for="password">Salasana</label>
+                    <input type="password" id="password" name="password"/>    
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Kirjaudu sisään</button>
+                    </div>
+                </fieldset>
+            </form>
+
         </div>
     </body>
 </html>
