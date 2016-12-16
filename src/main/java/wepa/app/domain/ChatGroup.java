@@ -17,6 +17,7 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @JoinColumn
     private List<Message> messages;
     
+    
     @NotNull
     @Column(unique = true)
     private String topic;

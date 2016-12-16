@@ -19,7 +19,7 @@ public class Account extends AbstractPersistable<Long> {
     @ManyToMany
     private List<ChatGroup> chatgroups;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany
     private List<Message> messages;
 
     @NotNull

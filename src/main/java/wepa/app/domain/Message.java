@@ -14,13 +14,11 @@ public class Message extends AbstractPersistable<Long> {
 
     private String content;
 
-    @ManyToOne
-    @JoinColumn
-    private Account account;
+    
+    private String username;
 
-    @ManyToOne
-    @NotNull
-    private ChatGroup group;
+    
+    private Long groupId;
 
  
 
@@ -32,20 +30,23 @@ public class Message extends AbstractPersistable<Long> {
         this.content = content;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-    
-    public ChatGroup getGroup() {
-        return this.group;
-    }
-    
-    public void setGroup(ChatGroup group) {
-        this.group = group;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+
+    
+ 
 }
