@@ -24,8 +24,8 @@
                     <table>
                         <tr>
                             <td>Ryhmän aihe:</td>
-                            <td><input type="text" name="topic" th:field="*{topic}"/></td>
-                            <td th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}">Aihe ei voi olla tyhjä.</td>
+                            <td><input type="text" name="topic" th:value="${topic}" id="topic"/></td>
+                            <!--<td th:if="${#topic.hasErrors('topic')}" th:errors="*{topic}">Aihe ei voi olla tyhjä.</td>-->
                         </tr>
                         <tr>
                             <td><input type="submit" value="Send"/></td>

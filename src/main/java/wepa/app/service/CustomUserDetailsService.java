@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package wepa.app.service;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,14 +18,20 @@ import wepa.app.repo.AccountRepo;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private AccountRepo accountRepository;
-
+    private AccountRepo accRepo;
+    
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByUsername(username);
+        Account account = accRepo.findByUsername(username);
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
+
+        Set<GrantedAuthority> granted = new HashSet<>();
+        account.getRoles().stream().forEach((role) -> {
+            granted.add(new SimpleGrantedAuthority(role.getName()));
+        });
 
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
@@ -35,6 +40,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("USER")));
+                granted);
     }
 }

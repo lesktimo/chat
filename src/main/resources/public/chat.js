@@ -19,5 +19,6 @@ function addMessage() {
 }
 
 function showNewMessage(message) {
+
     $("<p/>").text(message.timestamp + " " + message.content).appendTo("#messages");
 }
