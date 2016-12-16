@@ -9,6 +9,7 @@
     </head>
     <body>
         <div th:fragment="content">
+            <h1 id="topic" th:text="${group.topic}"></h1>
             <div id="messages">
                 <p th:each="message: ${messages}" th:text="${message}"></p>
             </div> 

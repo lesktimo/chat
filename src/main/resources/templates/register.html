@@ -12,12 +12,12 @@
                 <table>
                     <tr>
                         <td>Käyttäjänimi: </td>
-                        <td><input type="text" th:field="*{username}" /></td>
+                        <td><input type="text" th:field="*{username}" id="username" /></td>
                         <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Käyttäjänimi virheviesti</td>
                     </tr>
                     <tr>
                         <td>Salasana: </td>
-                        <td><input type="password" th:field="*{password}" /></td>
+                        <td><input type="password" th:field="*{password}" id="password"/></td>
                         <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Salasana virheviesti</td>
                     </tr>
                     <tr>

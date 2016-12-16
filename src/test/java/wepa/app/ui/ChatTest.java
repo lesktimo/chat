@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("Production")
+@ActiveProfiles("dev")
 public class ChatTest extends FluentTest {
 
     public WebDriver webDriver = new HtmlUnitDriver();
@@ -33,53 +33,98 @@ public class ChatTest extends FluentTest {
     public void setUp() {
         baseUrl = "http://localhost:" + port;
     }
-    
+
     @Test
-    public void test() {
-        assertTrue(true);
+    public void testLogin() {
+        goTo(baseUrl + "/login");
+        fill(find("#username")).with("testi");
+        fill(find("#password")).with("testi");
+        $("button", withText("Kirjaudu sisään")).click();
+
+        // uudelleenohjauksen tarkistus
+        //assertTrue(pageSource().contains(""));
+    }
+
+    @Test
+    public void cantLoginWithMissingInformation() {
+        goTo(baseUrl + "/login");
+        fill(find("#username")).with("testi");
+        $("button", withText("Kirjaudu sisään")).click();
+
+        // virheviestin tarkistus
+        //assertTrue(pageSource().contains(""));
+        fill(find("#password")).with("testi");
+        $("button", withText("Kirjaudu sisään")).click();
+
+        // virheviestin tarkistus
+        //assertTrue(pageSource().contains(""));
+    }
+
+    @Test
+    public void testRegistration() {
+        goTo(baseUrl + "/reg");
+        fill(find("#username")).with("user1");
+        fill(find("#password")).with("pass");
+        submit(find("form").first());
+
+        assertTrue(pageSource().contains("Kirjaudu sisään"));
+    }
+
+    @Test
+    public void cantRegisterWithMissingInformation() {
+        goTo(baseUrl + "/login");
+        fill(find("#username")).with("user1");
+        submit(find("form").first());
+
+        // virheviestin tarkistus
+        //assertTrue(pageSource().contains(""));
+        fill(find("#password")).with("pass");
+        submit(find("form").first());
+
+        // virheviestin tarkistus
+        //assertTrue(pageSource().contains(""));
+    }
+
+    @Test
+    public void canAddGroup() {
+        login();
+
+        goTo(baseUrl + "/groups");
+        assertTrue(pageSource().contains("Chatit"));
+        assertFalse(pageSource().contains("Ryhmä1"));
+
+        fill(find("#topic")).with("Ryhmä1");
+        submit(find("form").first());
+
+        assertTrue(pageSource().contains("Ryhmä1"));
     }
 
 //    @Test
-//    public void canAddGroup() {
-//        goTo(baseUrl);
-//        $("a", withText("Groups")).click();
-//        assertFalse(pageSource().contains("Ryhmä1"));
-//
-//        fill(find("#topic")).with("Ryhmä1");
-//        fill(find("#tags")).with("tagi1, tagi2");
-//        submit(find("form").first());
-//
-//        assertTrue(pageSource().contains("Ryhmä1"));
-//    }
-//    
-//    @Test
-//    public void groupWithEmptyTopicCannotBeAdded() {
-//        goTo(baseUrl);
-//        $("a", withText("Groups")).click();
-//        assertFalse(pageSource().contains("Ryhmä1"));
-//
-//        fill(find("#tags")).with("tagi");
-//        submit(find("form").first());
-//
-//        assertFalse(pageSource().contains("Ryhmä1"));
-//    }
-//
-//    @Test
 //    public void canAddMessageToGroup() {
-//        
-//        String message  = "Hello World!";
-//        
-//        goTo(baseUrl);
-//        $("a", withText("Groups")).click();
-//        fill(find("#group")).with("Ryhmä1");
-//        submit(find("form").first());
-//        
+//        login();
+//        addGroup();
 //        $("a", withText("Ryhmä1")).click();
+//        
+//        String message = "Hello World!";
+//
 //        assertFalse(pageSource().contains(message));
-//        
+//
 //        fill(find("#message")).with(message);
-//        submit(find("form").first());
-//        
+//        $("button", withText("Send!")).click();
+//
 //        assertTrue(pageSource().contains(message));
 //    }
+
+    private void login() {
+        goTo(baseUrl + "/login");
+        fill(find("#username")).with("testi");
+        fill(find("#password")).with("testi");
+        $("button", withText("Kirjaudu sisään")).click();
+    }
+
+    private void addGroup() {
+        goTo(baseUrl + "/groups");
+        fill(find("#topic")).with("Ryhmä1");
+        submit(find("form").first());
+    }
 }

@@ -62,8 +62,8 @@ public class ChatControllerTest {
         List<ChatGroup> groups = groupRepo.findAll();
         assertEquals(1, groups.size());
         assertEquals(chatTopic, groups.get(0).getTopic());
-        
-  //      mockMvc.perform(get("/groups/" + groups.get(0).getId())).andExpect(status().isOk());
+
+        //      mockMvc.perform(get("/groups/" + groups.get(0).getId())).andExpect(status().isOk());
     }
 
 //    @Test
@@ -84,7 +84,6 @@ public class ChatControllerTest {
 //        assertEquals("Hello World!", messages.get(0).getContent());
 //        assertEquals(chatTopic, messages.get(0).getGroup());
 //    }
-
     @Test
     public void testDeleteGroup() throws Exception {
         mockMvc.perform(post("/groups").param("topic", chatTopic));
