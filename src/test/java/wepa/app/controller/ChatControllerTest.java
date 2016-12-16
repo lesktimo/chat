@@ -77,7 +77,7 @@ public class ChatControllerTest {
 //        
 //        mockMvc.perform(post("/groups/" + group.getId())
 //                .contentType("application/json").content(jsonMessage));
-//
+//        
 //        List<Message> messages = messageRepo.findAll();
 //
 //        assertEquals(1, messages.size());

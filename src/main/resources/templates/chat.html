@@ -15,7 +15,7 @@
 
             <textarea rows="3" cols="50" id="message"></textarea>
             <button id="nappi">Send!</button>
-            
+
 
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -25,14 +25,13 @@
                         var urlPath = window.location.href;
                         $("#messages").html(old + '<p>' + message + '</p>');
                         $("#message").val('');
-
                         // var urlPath = window.location.href;
                         // alert("hello");
                         // var dataToSend = JSON.stringify({
                         //     content: $("#message").val(),
                         //     timestamp: $.now()
                         // });
-
+                        
                         // $.ajax({
                         //     url: urlPath,
                         //     dataType: 'json',
@@ -41,15 +40,12 @@
                         //     data: dataToSend
                         //     success: showMessage
                         // });
-                                
-                    });
-
-                
-
+                        
+                        });
                 });
             </script>
-            
-            
+
+
         </div>
     </body>
 </html>
