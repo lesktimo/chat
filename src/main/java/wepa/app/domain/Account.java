@@ -27,7 +27,7 @@ public class Account extends AbstractPersistable<Long> {
     private String username;
 
     @NotNull
-    @Length(min = 4, max = 25)
+    @Length(min = 4)
     private String password;
     
     @ManyToMany

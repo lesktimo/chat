@@ -22,7 +22,7 @@ public class AccountService {
 
 
     public void save(Account acc) {
-//        acc.setPassword(passwordEncoder().encode(acc.getPassword()));
+        acc.setPassword(passwordEncoder().encode(acc.getPassword()));
         acc.setRoles(new HashSet<>(roleRepo.findAll()));
         accRepo.save(acc);
     }
