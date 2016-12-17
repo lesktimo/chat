@@ -12,13 +12,14 @@
 
                 <h1 id="topicdisplay" th:text="${topic}"></h1>
                 <div id="messages">
+                    <p>Viestit ilmestyvät tänne </p>
                     <p th:each="message: ${messages}" th:text="${message}"></p>
                 </div> 
 
 
-                <textarea rows="3" cols="50" id="message"></textarea>
+                <textarea rows="3" cols="50" maxlength="150" id="message" class="inputfield"></textarea>
 
-                <input id="nappi" type="button"  value="Send!"/>
+                <input id="nappi" class="painike" type="button"  value="Send!"/>
 
                 <script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -27,7 +28,7 @@
                     var username = [[${username}]];
                     var id = [[${groupId}]]
 
-                    client = Stomp.over(new SockJS('/register'));
+                            client = Stomp.over(new SockJS('/register'));
                     client.connect({}, function (frame) {
                         var subscribeTo = '/channel/' + id;
                         client.subscribe(subscribeTo, function (response) {
@@ -46,6 +47,8 @@
                         var textNode = document.createTextNode(message.username + ": " + message.content);
                         paragraph.appendChild(textNode);
                         document.getElementById("messages").appendChild(paragraph);
+                        var objDiv = document.getElementById("messages");
+                        objDiv.scrollTop = objDiv.scrollHeight;
                     }
 
 

@@ -11,17 +11,17 @@
             <form action="#" th:action="@{/reg}" th:object="${account}" method="POST">
                 <table>
                     <tr>
-                        <td>Käyttäjänimi: </td>
+                        <td class="teksti">Käyttäjänimi: </td>
                         <td><input type="text" th:field="*{username}" id="username" /></td>
                         <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Käyttäjänimi virheviesti</td>
                     </tr>
-                    <tr>
-                        <td>Salasana: </td>
+                    <tr >
+                        <td class="teksti">Salasana: </td>
                         <td><input type="password" th:field="*{password}" id="password"/></td>
                         <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Salasana virheviesti</td>
                     </tr>
                     <tr>
-                        <td><button type="submit">Lähetä</button></td>
+                        <td><button class="painike" type="submit">Lähetä</button></td>
                     </tr>
                 </table>
             </form>

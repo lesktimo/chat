@@ -14,7 +14,7 @@
 
             <ul>
                 <li th:each="group : ${groups}">
-                    <a th:href="@{groups/{groupId}(groupId=${group.id})}" th:text="${group.topic}">group topic</a>
+                    <a th:href="@{groups/{groupId}(groupId=${group.id})}"  id="aihe" th:text="${group.topic}">group topic</a>
                 </li>
             </ul>
 
@@ -23,12 +23,12 @@
                 <form th:action="@{/groups}" method="POST">
                     <table>
                         <tr>
-                            <td>Ryhmän aihe:</td>
-                            <td><input type="text" name="topic" th:value="${topic}" id="topic"/></td>
+                            <td class="teksti">Ryhmän aihe:</td>
+                            <td><input type="text" class="inputfield" name="topic" th:value="${topic}" id="topic"/></td>
                             <!--<td th:if="${#topic.hasErrors('topic')}" th:errors="*{topic}">Aihe ei voi olla tyhjä.</td>-->
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Send"/></td>
+                            <td><input type="submit" class="painike" value="Send"/></td>
                         </tr>
                     </table>
                 </form>

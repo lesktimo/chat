@@ -32,10 +32,16 @@ body {
     background-color: #737373;
 }
 
+#messages {
+    height: 750px;
+    overflow: auto;
+}
+
 #messages p {
     padding: 15px;
     background-color: #fff;
     border-radius: 10px 10px;
+    max-width: 930px;
 }
 
 #topicdisplay {
@@ -45,6 +51,27 @@ body {
     font-weight: bold;
 }
 
-#message {
+.inputfield {
     border-radius: 10px 10px;
+    height: auto;
+}
+
+.painike {
+    background-color: #e7e7e7;
+    color: black;
+    font-size: 13px;
+    border-radius: 10px 10px;
+    border: 2px solid black;
+    
+}
+
+#aihe {
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+.teksti {
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 18px;
 }
