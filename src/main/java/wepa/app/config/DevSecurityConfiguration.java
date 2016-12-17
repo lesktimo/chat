@@ -32,7 +32,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //resurssit, rekisesteröintisivu, h2-console ja index auki kaikille     
                 .antMatchers(
-                        "/resources/**", "/css/**", "/reg", "/console/*", "/index")
+                        "/resources/**", "/css/**", "/reg", "/console/*", "/index","/ws/*","/channel/*", "/register/*")
                 .permitAll()
                 //kaikki muut sivut vaativat autentikaation
                 .anyRequest().authenticated()

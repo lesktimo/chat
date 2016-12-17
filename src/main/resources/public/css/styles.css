@@ -20,9 +20,31 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .navbar li a:hover {
     background-color: #fff;
     color: #000;
+}
+
+body {
+    background-color: #737373;
+}
+
+#messages p {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px 10px;
+}
+
+#topicdisplay {
+    position: relative;
+    left: 41%;
+    color:white;
+    font-weight: bold;
+}
+
+#message {
+    border-radius: 10px 10px;
 }

@@ -74,25 +74,27 @@ public class ChatController {
         model.addAttribute("messages", groupRepo.findOne(id).getMessages());
         model.addAttribute("groupId", id);
         model.addAttribute("username", principal.getName());
+        model.addAttribute("topic", groupRepo.findOne(id).getTopic());
         
         return "chat";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST,
-            consumes = "application/json", produces = "application/json")
-    @ResponseBody
-    public Message addMessage(@RequestBody Message message, @PathVariable Long id) {
-        ChatGroup group = groupRepo.findOne(id);
-        message.setGroupId(id);
-        group.getMessages().add(message);
-        groupRepo.save(group);
-
-        return messageRepo.save(message);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.POST,
+//            consumes = "application/json", produces = "application/json")
+//    @ResponseBody
+//    public Message addMessage(@RequestBody Message message, @PathVariable Long id) {
+//        ChatGroup group = groupRepo.findOne(id);
+//        message.setGroupId(id);
+//        group.getMessages().add(message);
+//        groupRepo.save(group);
+//
+//        return messageRepo.save(message);
+//    }
     
     @MessageMapping("/messages")
     public void handleMessage(Message message) throws Exception {
         messageService.addMessage(message);
+        messageRepo.save(message);
     }
 
 }

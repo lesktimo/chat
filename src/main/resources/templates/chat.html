@@ -4,61 +4,64 @@
         <title>Alien Invasion Tomato Monster Mexican Armada Brothers Who Are Just Regural Brothers Running In A Van From An Asteroid And All Sorts Of Things The Chat</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="chat.js"></script>
+        <!--        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     </head>
     <body>
         <div th:fragment="content">
-            <h1 id="topic" th:text="${group.topic}"></h1>
-            <div id="messages">
-                <p th:each="message: ${messages}" th:text="${message}"></p>
-            </div> 
+            
+
+                <h1 id="topicdisplay" th:text="${topic}"></h1>
+                <div id="messages">
+                    <p th:each="message: ${messages}" th:text="${message}"></p>
+                </div> 
 
 
-            <textarea rows="3" cols="50" id="message"></textarea>
+                <textarea rows="3" cols="50" id="message"></textarea>
 
-            <input id="nappi" type="button"  value="Send!"/>
+                <input id="nappi" type="button"  value="Send!"/>
 
-            <script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-            <script type="text/javascript" th:inline="javascript">
-                var client = null;
-                var username = [[${username}]];
-                
-                client = Stomp.over(new SockJS('/register'));
-                client.connect({}, function (frame) {
-                    var subscribeTo = '/channel/1';
-                    client.subscribe(subscribeTo, function (response) {
-                        displayMessage(JSON.parse(response.body));
+                <script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+                <script type="text/javascript" th:inline="javascript">
+                    var client = null;
+                    var username = [[${username}]];
+                    var id = [[${groupId}]]
+
+                    client = Stomp.over(new SockJS('/register'));
+                    client.connect({}, function (frame) {
+                        var subscribeTo = '/channel/' + id;
+                        client.subscribe(subscribeTo, function (response) {
+                            displayMessage(JSON.parse(response.body));
+                        });
                     });
-                });
 
-                $("#nappi").click(function () {
-                    client.send("ws/messages", {}, JSON.stringify({'content': $("#message").val(), 'username': username, 'groupId': '1'}));
-                })
-
-
-                function displayMessage(message) {
-                    var paragraph = document.createElement("p");
-                    var textNode = document.createTextNode(message.username + ": " + message.content);
-                    paragraph.appendChild(textNode);
-                    document.getElementById("messages").appendChild(paragraph);
-                }
+                    $("#nappi").click(function () {
+                        client.send("/ws/messages", {}, JSON.stringify({'content': $("#message").val(), 'username': username, 'groupId': id}));
+                        $("#message").val('');
+                    })
 
 
-
-
-                window.onbeforeunload = function () {
-                    client.disconnect();
-                    client.close();
-                }
+                    function displayMessage(message) {
+                        var paragraph = document.createElement("p");
+                        var textNode = document.createTextNode(message.username + ": " + message.content);
+                        paragraph.appendChild(textNode);
+                        document.getElementById("messages").appendChild(paragraph);
+                    }
 
 
 
 
-            </script>
+                    window.onbeforeunload = function () {
+                        client.disconnect();
+                        client.close();
+                    }
 
 
+
+
+                </script>
+
+            
         </div>
     </body>
 </html>
