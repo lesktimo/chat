@@ -9,7 +9,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Role extends AbstractPersistable<Long> {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Account account;
 
     private String roleName;
