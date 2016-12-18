@@ -18,6 +18,6 @@ public class MessageService {
     private SimpMessagingTemplate template;
     
     public void addMessage(Message m) {
-        this.template.convertAndSend("/channel/1", m);
+        this.template.convertAndSend("/channel/" + m.getGroupId(), m);
     }
 }
