@@ -29,7 +29,27 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
-        List<GrantedAuthority> list = buildUserAuthority(account.getRoles());
+//        List<GrantedAuthority> list = buildUserAuthority(account.getRoles());
+//
+//        return new org.springframework.security.core.userdetails.User(
+//                account.getUsername(),
+//                account.getPassword(),
+//                true,
+//                true,
+//                true,
+//                true,
+//                list);
+        
+        
+         
+        if (account == null) {
+            throw new UsernameNotFoundException("No such user: " + username);
+        }
+
+        Set<GrantedAuthority> granted = new HashSet<>();
+        account.getRoles().stream().forEach((role) -> {
+            granted.add(new SimpleGrantedAuthority(role.getName()));
+        });
 
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
@@ -38,15 +58,16 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                list);
+                granted);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
-        Set<GrantedAuthority> setAuths = new HashSet<>();
-        userRoles.stream().forEach((userRole) -> {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName()));
-        });
-        List<GrantedAuthority> Result = new ArrayList<>(setAuths);
-        return Result;
-    }
+
+//    private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
+//        Set<GrantedAuthority> setAuths = new HashSet<>();
+//        userRoles.stream().forEach((userRole) -> {
+//            setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName()));
+//        });
+//        List<GrantedAuthority> Result = new ArrayList<>(setAuths);
+//        return Result;
+//    }
 }

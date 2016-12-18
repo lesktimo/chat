@@ -84,8 +84,9 @@ public class ChatControllerTest {
 //
 //        assertEquals(1, messages.size());
 //        assertEquals("Hello World!", messages.get(0).getContent());
-//        assertEquals(chatTopic, messages.get(0).getGroup());
+//        assertEquals(group.getId(), messages.get(0).getGroupId());
 //    }
+    
     @Test
     public void testDeleteGroup() throws Exception {
         mockMvc.perform(post("/groups").param("topic", chatTopic));

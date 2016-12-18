@@ -17,7 +17,7 @@ import wepa.app.repo.AccountRepo;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 import wepa.app.service.AccountService;
-import wepa.app.service.MessageService;
+//import wepa.app.service.MessageService;
 
 @Controller
 @RequestMapping(value = "/groups")
@@ -35,8 +35,8 @@ public class ChatController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private MessageService messageService;
+//    @Autowired
+//    private MessageService messageService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
@@ -92,11 +92,11 @@ public class ChatController {
         return "chat";
     }
 
-    @MessageMapping("/messages")
-    public void handleMessage(Message message) throws Exception {
-        messageService.addMessage(message);
-        accountService.findByUsername(message.getUsername()).getMessages().add(message);
-        messageRepo.save(message);
-    }
+//    @MessageMapping("/messages")
+//    public void handleMessage(Message message) throws Exception {
+//        messageService.addMessage(message);
+//        accountService.findByUsername(message.getUsername()).getMessages().add(message);
+//        messageRepo.save(message);
+//    }
 
 }
