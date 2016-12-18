@@ -3,21 +3,20 @@ package wepa.app.domain;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 @Table(name = "account")
 public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany
-    private List<ChatGroup> chatgroups;
+    private List<ChatGroup> chatGroups;
 
     @OneToMany
     private List<Message> messages;
@@ -29,17 +28,15 @@ public class Account extends AbstractPersistable<Long> {
     @NotNull
     @Length(min = 4)
     private String password;
-    
-    @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+
+    private Set<SimpleGrantedAuthority> roles;
 
     public List<ChatGroup> getChatGroups() {
-        return chatgroups;
+        return chatGroups;
     }
 
     public void setChatGroups(List<ChatGroup> chatGroups) {
-        this.chatgroups = chatGroups;
+        this.chatGroups = chatGroups;
     }
 
     public List<Message> getMessages() {
@@ -66,11 +63,11 @@ public class Account extends AbstractPersistable<Long> {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Set<SimpleGrantedAuthority> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<SimpleGrantedAuthority> roles) {
         this.roles = roles;
     }
 
