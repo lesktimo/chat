@@ -22,7 +22,7 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String topic;
     
-    @ManyToMany(mappedBy = "chatgroups")
+    @ManyToMany(mappedBy = "chatGroups")
     private List<Account> participants;
 
     public List<Message> getMessages() {
