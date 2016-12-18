@@ -66,14 +66,6 @@ public class Account extends AbstractPersistable<Long> {
         this.password = password;
     }
 
-    public List<ChatGroup> getChatgroups() {
-        return chatgroups;
-    }
-
-    public void setChatgroups(List<ChatGroup> chatgroups) {
-        this.chatgroups = chatgroups;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }

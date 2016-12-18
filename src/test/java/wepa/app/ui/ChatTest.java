@@ -90,7 +90,7 @@ public class ChatTest extends FluentTest {
         login();
 
         goTo(baseUrl + "/groups");
-        assertTrue(pageSource().contains("Chatit"));
+        assertTrue(pageSource().contains("Kaikki chatit"));
         assertFalse(pageSource().contains("Ryhmä1"));
 
         fill(find("#topic")).with("Ryhmä1");
