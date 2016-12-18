@@ -63,21 +63,21 @@ public class ChatController {
         return g;
     }
 
-    @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
-    public String listMyGroups(Model model, Principal principal) {
-        model.addAttribute("owngroups", accountService.findByUsername(principal.getName()).getChatGroups());
-        return "owngroups";
-    }
+//    @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
+//    public String listMyGroups(Model model, Principal principal) {
+//        model.addAttribute("owngroups", accountService.findByUsername(principal.getName()).getChatGroups());
+//        return "owngroups";
+//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String followGroup(Principal principal, @PathVariable Long id) {
-        Account a = accountService.findByUsername(principal.getName());
+//        Account a = accountService.findByUsername(principal.getName());
         ChatGroup g = groupRepo.findOne(id);
 
-        if (!a.getChatGroups().contains(g)) {
-            a.getChatGroups().add(g);
-            accountRepo.save(a);
-        }
+//        if (!a.getChatGroups().contains(g)) {
+//            a.getChatGroups().add(g);
+//            accountRepo.save(a);
+//        }
 
         return "redirect:/groups/mygroups";
     }

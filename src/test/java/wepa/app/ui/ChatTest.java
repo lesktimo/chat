@@ -102,7 +102,7 @@
 //
 //        assertTrue(pageSource().contains("Ryhmä1"));
 //    }
-
+//
 //    @Test
 //    public void canAddMessageToGroup() {
 //        login();

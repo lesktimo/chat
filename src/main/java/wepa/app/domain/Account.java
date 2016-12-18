@@ -74,10 +74,10 @@ public class Account extends AbstractPersistable<Long> {
 //        this.roles = roles;
 //    }
 
-       @ManyToMany
-    private List<ChatGroup> chatgroups;
+    @ManyToMany
+    private List<ChatGroup> chatGroups;
 
-    @OneToMany(mappedBy = "account")
+//    @OneToMany(mappedBy = "account")
     private List<Message> messages;
 
     @NotNull
@@ -88,16 +88,16 @@ public class Account extends AbstractPersistable<Long> {
     @Length(min = 4, max = 25)
     private String password;
     
-    @ManyToMany
-    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+//    @ManyToMany
+//    @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles;
 
     public List<ChatGroup> getChatGroups() {
-        return chatgroups;
+        return chatGroups;
     }
 
     public void setChatGroups(List<ChatGroup> chatGroups) {
-        this.chatgroups = chatGroups;
+        this.chatGroups = chatGroups;
     }
 
     public List<Message> getMessages() {
@@ -125,18 +125,18 @@ public class Account extends AbstractPersistable<Long> {
     }
 
     public List<ChatGroup> getChatgroups() {
-        return chatgroups;
+        return chatGroups;
     }
 
     public void setChatgroups(List<ChatGroup> chatgroups) {
-        this.chatgroups = chatgroups;
+        this.chatGroups = chatgroups;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 }

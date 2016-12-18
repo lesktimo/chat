@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,47 +19,57 @@ import wepa.app.repo.AccountRepo;
 @Service
 public class AccountService {
 
-    @Autowired
-    private AccountRepo accRepo;
-
+//    @Autowired
+//    private AccountRepo accRepo;
+     @Autowired
+    private HttpSession session;
 //    @Autowired
 //    private RoleRepo roleRepo;
 
-    @PostConstruct
-    public void init() {
-        if (accRepo.findByUsername("testi") == null) {
+//    @PostConstruct
+//    public void init() {
+//        if (accRepo.findByUsername("testi") == null) {
 //            HashSet<Role> roles = new HashSet<>();
 //            Role user = new Role();
 //            user.setRoleName("USER");
 //            roles.add(user);
-            Account account = new Account();
-            account.setUsername("testi");
-            account.setPassword(passwordEncoder().encode("testi"));
+//            Account account = new Account();
+//            account.setUsername("testi");
+//            account.setPassword(passwordEncoder().encode("testi"));
 //            account.setRoles(roles);
 //            user.setAccount(account);
-            accRepo.save(account);
+//            accRepo.save(account);
 //            roleRepo.save(user);
-        }
-    }
+//        }
+//    }
 
-    public void save(Account acc) {
+//    public void save(Account acc) {
 //        HashSet<Role> roles = new HashSet<>();
 //        Role user = new Role();
 //        user.setRoleName("USER");
 //        roles.add(user);
-        acc.setPassword(passwordEncoder().encode(acc.getPassword()));
+//        acc.setPassword(passwordEncoder().encode(acc.getPassword()));
 //        acc.setRoles(roles);
 //        user.setAccount(acc);
-        accRepo.save(acc);
+//        accRepo.save(acc);
 //        roleRepo.save(user);
+//    }
+//
+//    public Account findByUsername(String username) {
+//        return accRepo.findByUsername(username);
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
+
+    public void setAccount(Account account) {
+        session.setAttribute("account", account);
     }
 
-    public Account findByUsername(String username) {
-        return accRepo.findByUsername(username);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public Account getAccount() {
+        return (Account) session.getAttribute("account");
     }
 }
