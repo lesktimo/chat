@@ -2,14 +2,15 @@ package wepa.app.domain;
 
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 @Table(name = "account")
@@ -29,7 +30,8 @@ public class Account extends AbstractPersistable<Long> {
     @Length(min = 4)
     private String password;
 
-    private Set<SimpleGrantedAuthority> roles;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private Set<Role> roles;
 
     public List<ChatGroup> getChatGroups() {
         return chatGroups;
@@ -63,11 +65,11 @@ public class Account extends AbstractPersistable<Long> {
         this.password = password;
     }
 
-    public Set<SimpleGrantedAuthority> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<SimpleGrantedAuthority> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
