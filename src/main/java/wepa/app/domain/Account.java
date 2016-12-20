@@ -18,9 +18,6 @@ public class Account extends AbstractPersistable<Long> {
     @ManyToMany
     private List<ChatGroup> chatGroups;
 
-    @OneToMany
-    private List<Message> messages;
-
     @NotNull
     @Length(min = 4, max = 25)
     private String username;
@@ -38,14 +35,6 @@ public class Account extends AbstractPersistable<Long> {
 
     public void setChatGroups(List<ChatGroup> chatGroups) {
         this.chatGroups = chatGroups;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
     public String getUsername() {

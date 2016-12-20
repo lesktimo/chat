@@ -95,7 +95,6 @@ public class ChatController {
     @MessageMapping("/messages")
     public void handleMessage(Message message) throws Exception {
         messageService.addMessage(message);
-        accountService.findByUsername(message.getUsername()).getMessages().add(message);
         messageRepo.save(message);
     }
 
