@@ -7,7 +7,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #000;
+    background-color: #222223;
+    border-radius: 10px 10px;
 }
 
 .navbar li {
@@ -21,15 +22,16 @@
     padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;
+
 }
 
 .navbar li a:hover {
     background-color: #fff;
-    color: #000;
+    color: #222223;
 }
 
 body {
-    background-color: #737373;
+    background-color: #abb0ba;
 }
 
 #messages {
@@ -48,7 +50,8 @@ body {
 #topicdisplay {
     position: relative;
     left: 41%;
-    color:white;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    color: #222223;
     font-weight: bold;
 }
 
@@ -63,13 +66,13 @@ body {
     font-size: 13px;
     border-radius: 10px 10px;
     border: 2px solid black;
-    
+
 }
 
 #aihe {
     font-size: 20px;
     font-weight: bold;
-    
+
 }
 
 .teksti {
