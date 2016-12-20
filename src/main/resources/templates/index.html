@@ -12,8 +12,8 @@
     <body>
         <div class="navbar">
             <ul>
-                <li><a th:href="@{/groups}">Kaikki chatit</a></li>
-                <li><a th:href="@{/groups/mygroups}">Seuratut chatit</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/groups}">Kaikki chatit</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/groups/mygroups}">Seuratut chatit</a></li>
                 <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Kirjaudu ulos</a></li>
                 <li><a sec:authorize="isAnonymous()" th:href="@{/login}">Kirjaudu sisään</a></li>
                 <li><a sec:authorize="isAnonymous()" th:href="@{/reg}">Rekisteröidy</a></li>
