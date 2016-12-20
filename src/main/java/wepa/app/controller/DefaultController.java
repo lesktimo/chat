@@ -12,10 +12,13 @@ public class DefaultController {
     public String handleDefault() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getName().isEmpty() || auth.getName() == null) {
+
             return "redirect:/login";
+
         } else {
+
             return "redirect:/groups";
         }
     }
-        
+
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,22 +26,31 @@ public class AccountService {
     @PostConstruct
     public void init() {
         if (accRepo.findByUsername("testi") == null) {
+
             HashSet<Role> roles = new HashSet<>();
             Role user = new Role();
             user.setRoleName("USER");
+
             roles.add(user);
-            Account account = new Account();
-            account.setUsername("testi");
-            account.setPassword(passwordEncoder().encode("testi"));
-            account.setRoles(roles);
-            account = accRepo.save(account);
+
+            Account acc = new Account();
+            acc.setUsername("testi");
+            acc.setPassword(passwordEncoder().encode("testi"));
+            acc.setRoles(roles);
+            acc = accRepo.save(acc);
+
             if (user.getAccounts() == null) {
+
                 List<Account> accounts = new ArrayList<>();
-                accounts.add(account);
+                accounts.add(acc);
                 user.setAccounts(accounts);
+
             } else {
-                user.getAccounts().add(account);
+
+                user.getAccounts().add(acc);
+
             }
+
             roleRepo.save(user);
         }
     }
@@ -50,22 +58,35 @@ public class AccountService {
     public void save(Account acc) {
         HashSet<Role> roles = new HashSet<>();
         Role user = new Role();
+
         if (roleRepo.findByRoleName("USER") != null) {
+
             user = roleRepo.findByRoleName("USER");
+
         } else {
+
             user.setRoleName("USER");
+
         }
+
         roles.add(user);
+
         acc.setPassword(passwordEncoder().encode(acc.getPassword()));
         acc.setRoles(roles);
         acc = accRepo.save(acc);
+
         if (user.getAccounts() == null) {
+
             List<Account> accounts = new ArrayList<>();
             accounts.add(acc);
             user.setAccounts(accounts);
+
         } else {
+
             user.getAccounts().add(acc);
+
         }
+
         roleRepo.save(user);
     }
 

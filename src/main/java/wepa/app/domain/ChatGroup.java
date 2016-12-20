@@ -1,4 +1,3 @@
-
 package wepa.app.domain;
 
 import java.util.List;
@@ -16,12 +15,11 @@ public class ChatGroup extends AbstractPersistable<Long> {
     @OneToMany
     @JoinColumn
     private List<Message> messages;
-    
-    
+
     @NotNull
     @Column(unique = true)
     private String topic;
-    
+
     @ManyToMany(mappedBy = "chatGroups")
     private List<Account> participants;
 

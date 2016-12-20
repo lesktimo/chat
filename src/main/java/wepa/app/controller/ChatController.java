@@ -41,8 +41,6 @@ public class ChatController {
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
         model.addAttribute("groups", groupRepo.findAll());
-        long apu = groupRepo.count();
-        model.addAttribute("apu", apu);
 
         return "groups";
     }
@@ -52,6 +50,7 @@ public class ChatController {
         ChatGroup group = new ChatGroup();
         group.setTopic(topic);
         groupRepo.save(group);
+
         return "redirect:/groups";
     }
 
@@ -60,12 +59,14 @@ public class ChatController {
     public ChatGroup deleteGroup(@PathVariable Long id) {
         ChatGroup g = groupRepo.getOne(id);
         groupRepo.delete(g);
+
         return g;
     }
 
     @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
     public String listMyGroups(Model model, Principal principal) {
         model.addAttribute("owngroups", accountService.findByUsername(principal.getName()).getChatGroups());
+
         return "owngroups";
     }
 
@@ -73,7 +74,6 @@ public class ChatController {
     public String followGroup(Principal principal, @PathVariable Long id) {
         Account a = accountService.findByUsername(principal.getName());
         ChatGroup g = groupRepo.findOne(id);
-
         if (!a.getChatGroups().contains(g)) {
             a.getChatGroups().add(g);
             accountRepo.save(a);

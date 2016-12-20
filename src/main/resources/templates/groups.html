@@ -9,9 +9,6 @@
         <div th:fragment="content">
             <h2>Kaikki chatit</h2>
 
-
-            <p th:text="${apu}"></p>
-
             <ul>
                 <li th:each="group : ${groups}">
                     <a th:href="@{groups/{groupId}(groupId=${group.id})}"  id="aihe" th:text="${group.topic}">group topic</a>

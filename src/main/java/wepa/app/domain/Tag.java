@@ -1,3 +1,5 @@
+//todo: tagit tai aihealue chatgroupeille
+
 //package wepa.app.domain;
 //
 //import java.util.List;
