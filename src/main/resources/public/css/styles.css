@@ -35,6 +35,7 @@ body {
 #messages {
     height: 750px;
     overflow: auto;
+    max-width: 980px;
 }
 
 #messages p {

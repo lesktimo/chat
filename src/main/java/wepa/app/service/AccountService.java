@@ -43,13 +43,19 @@ public class AccountService {
 
     public void save(Account acc) {
         HashSet<Role> roles = new HashSet<>();
+        
+        
         Role user = new Role();
         user.setRoleName("USER");
+        
+        
+        
         roles.add(user);
         acc.setPassword(passwordEncoder().encode(acc.getPassword()));
         acc.setRoles(roles);
+        acc = accRepo.save(acc);
+        
         user.setAccount(acc);
-        accRepo.save(acc);
         roleRepo.save(user);
     }
 
