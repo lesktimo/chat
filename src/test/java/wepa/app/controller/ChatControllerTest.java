@@ -54,11 +54,6 @@ public class ChatControllerTest {
         testGroup = new ChatGroup();
         testGroup.setTopic(chatTopic);
     }
-    
-    @Test
-    public void test() {
-        assertTrue(true);
-    }
 
     @Test
     public void postAddsGroupToDatabase() throws Exception {
@@ -72,7 +67,7 @@ public class ChatControllerTest {
 //        mockMvc.perform(get("/groups/" + groups.get(0).getId())).andExpect(status().isOk());
 
     }
-
+    
 //    @Test
 //    public void postAddsMessageToGroup() throws Exception {
 //        ChatGroup group = groupRepo.save(testGroup);

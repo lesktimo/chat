@@ -45,8 +45,7 @@ public class ChatTest extends FluentTest {
         fill(find("#password")).with("testi");
         $("button", withText("Kirjaudu sisään")).click();
 
-        // uudelleenohjauksen tarkistus
-        //assertTrue(pageSource().contains(""));
+        assertTrue(pageSource().contains("Kaikki chatit"));
     }
 
     @Test
@@ -55,13 +54,11 @@ public class ChatTest extends FluentTest {
         fill(find("#username")).with("testi");
         $("button", withText("Kirjaudu sisään")).click();
 
-        // virheviestin tarkistus
-        //assertTrue(pageSource().contains(""));
+        assertTrue(pageSource().contains("Väärä käyttäjänimi tai salasana!"));
         fill(find("#password")).with("testi");
         $("button", withText("Kirjaudu sisään")).click();
 
-        // virheviestin tarkistus
-        //assertTrue(pageSource().contains(""));
+        assertTrue(pageSource().contains("Väärä käyttäjänimi tai salasana!"));
     }
 
 //    @Test
@@ -74,20 +71,20 @@ public class ChatTest extends FluentTest {
 //        assertTrue(pageSource().contains("Kirjaudu sisään"));
 //    }
 
-    @Test
-    public void cantRegisterWithMissingInformation() {
-        goTo(baseUrl + "/login");
-        fill(find("#username")).with("user1");
-        submit(find("form").first());
-
-        // virheviestin tarkistus
-        //assertTrue(pageSource().contains(""));
-        fill(find("#password")).with("pass");
-        submit(find("form").first());
-
-        // virheviestin tarkistus
-        //assertTrue(pageSource().contains(""));
-    }
+//    @Test
+//    public void cantRegisterWithMissingInformation() {
+//        goTo(baseUrl + "/reg");
+//        fill(find("#username")).with("user1");
+//        submit(find("form").first());
+//
+//        assertTrue(pageSource().contains("length must be between 4 and 2147483647"));
+//        fill(find("#username")).with("");
+//        
+//        fill(find("#password")).with("pass");
+//        submit(find("form").first());
+//
+//        assertTrue(pageSource().contains("length must be between 4 and 25"));
+//    }
 
     @Test
     public void canAddGroup() {
