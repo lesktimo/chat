@@ -1,8 +1,10 @@
 package wepa.app.domain;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -11,8 +13,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "account_role")
 public class Role extends AbstractPersistable<Long> {
 
-//    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Account account;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Account> accounts;
 
     private String roleName;
 
@@ -24,12 +26,12 @@ public class Role extends AbstractPersistable<Long> {
         this.roleName = roleName;
     }
 
-    public Account getAccount() {
-        return account;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
 }

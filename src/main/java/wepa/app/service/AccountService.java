@@ -35,27 +35,37 @@ public class AccountService {
             account.setUsername("testi");
             account.setPassword(passwordEncoder().encode("testi"));
             account.setRoles(roles);
-            user.setAccount(account);
-            accRepo.save(account);
+            account = accRepo.save(account);
+            if (user.getAccounts() == null) {
+                List<Account> accounts = new ArrayList<>();
+                accounts.add(account);
+                user.setAccounts(accounts);
+            } else {
+                user.getAccounts().add(account);
+            }
             roleRepo.save(user);
         }
     }
 
     public void save(Account acc) {
         HashSet<Role> roles = new HashSet<>();
-        
-        
         Role user = new Role();
-        user.setRoleName("USER");
-        
-        
-        
+        if (roleRepo.findByRoleName("USER") != null) {
+            user = roleRepo.findByRoleName("USER");
+        } else {
+            user.setRoleName("USER");
+        }
         roles.add(user);
         acc.setPassword(passwordEncoder().encode(acc.getPassword()));
         acc.setRoles(roles);
         acc = accRepo.save(acc);
-        
-        user.setAccount(acc);
+        if (user.getAccounts() == null) {
+            List<Account> accounts = new ArrayList<>();
+            accounts.add(acc);
+            user.setAccounts(accounts);
+        } else {
+            user.getAccounts().add(acc);
+        }
         roleRepo.save(user);
     }
 

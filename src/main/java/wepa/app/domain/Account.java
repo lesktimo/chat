@@ -29,7 +29,7 @@ public class Account extends AbstractPersistable<Long> {
     @Length(min = 4)
     private String password;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Role> roles;
 
     public List<ChatGroup> getChatGroups() {

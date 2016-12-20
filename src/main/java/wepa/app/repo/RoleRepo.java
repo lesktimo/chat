@@ -5,4 +5,5 @@ import wepa.app.domain.Role;
 
 public interface RoleRepo extends JpaRepository<Role, Long> {
 
+    Role findByRoleName(String roleName);
 }
