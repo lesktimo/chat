@@ -2,7 +2,7 @@ package wepa.app.controller;
 
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ import wepa.app.repo.AccountRepo;
 import wepa.app.repo.GroupRepo;
 import wepa.app.repo.MessageRepo;
 import wepa.app.service.AccountService;
-//import wepa.app.service.MessageService;
+import wepa.app.service.MessageService;
 
 @Controller
 @RequestMapping(value = "/groups")
@@ -35,14 +35,12 @@ public class ChatController {
     @Autowired
     private AccountService accountService;
 
-//    @Autowired
-//    private MessageService messageService;
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String listGroups(Model model) {
         model.addAttribute("groups", groupRepo.findAll());
-        long apu = groupRepo.count();
-        model.addAttribute("apu", apu);
 
         return "groups";
     }
@@ -52,6 +50,7 @@ public class ChatController {
         ChatGroup group = new ChatGroup();
         group.setTopic(topic);
         groupRepo.save(group);
+
         return "redirect:/groups";
     }
 
@@ -60,24 +59,25 @@ public class ChatController {
     public ChatGroup deleteGroup(@PathVariable Long id) {
         ChatGroup g = groupRepo.getOne(id);
         groupRepo.delete(g);
+
         return g;
     }
 
-//    @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
-//    public String listMyGroups(Model model, Principal principal) {
-//        model.addAttribute("owngroups", accountService.findByUsername(principal.getName()).getChatGroups());
-//        return "owngroups";
-//    }
+    @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
+    public String listMyGroups(Model model, Principal principal) {
+        model.addAttribute("owngroups", accountService.findByUsername(principal.getName()).getChatGroups());
+
+        return "owngroups";
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String followGroup(Principal principal, @PathVariable Long id) {
-//        Account a = accountService.findByUsername(principal.getName());
+        Account a = accountService.findByUsername(principal.getName());
         ChatGroup g = groupRepo.findOne(id);
-
-//        if (!a.getChatGroups().contains(g)) {
-//            a.getChatGroups().add(g);
-//            accountRepo.save(a);
-//        }
+        if (!a.getChatGroups().contains(g)) {
+            a.getChatGroups().add(g);
+            accountRepo.save(a);
+        }
 
         return "redirect:/groups/mygroups";
     }
@@ -92,11 +92,10 @@ public class ChatController {
         return "chat";
     }
 
-//    @MessageMapping("/messages")
-//    public void handleMessage(Message message) throws Exception {
-//        messageService.addMessage(message);
-//        accountService.findByUsername(message.getUsername()).getMessages().add(message);
-//        messageRepo.save(message);
-//    }
+    @MessageMapping("/messages")
+    public void handleMessage(Message message) throws Exception {
+        messageService.addMessage(message);
+        messageRepo.save(message);
+    }
 
 }

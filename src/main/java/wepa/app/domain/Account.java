@@ -4,22 +4,16 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name = "account")
 public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany
     private List<ChatGroup> chatGroups;
-
-    @OneToMany
-    private List<Message> messages;
 
     @NotNull
     @Length(min = 4, max = 25)
@@ -29,7 +23,7 @@ public class Account extends AbstractPersistable<Long> {
     @Length(min = 4)
     private String password;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Role> roles;
 
     public List<ChatGroup> getChatGroups() {
@@ -38,14 +32,6 @@ public class Account extends AbstractPersistable<Long> {
 
     public void setChatGroups(List<ChatGroup> chatGroups) {
         this.chatGroups = chatGroups;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
     public String getUsername() {

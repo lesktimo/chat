@@ -7,7 +7,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #000;
+    background-color: #222223;
+    border-radius: 10px 10px;
 }
 
 .navbar li {
@@ -21,20 +22,28 @@
     padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;
+
 }
 
 .navbar li a:hover {
     background-color: #fff;
-    color: #000;
+    color: #222223;
 }
 
 body {
-    background-color: #737373;
+    background-color: #abb0ba;
+    background-image: url("pineapple.png");
+    background-position: bottom right;
+    background-size: 50% 50%;
+    padding-bottom: 50px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 #messages {
     height: 750px;
     overflow: auto;
+    max-width: 980px;
 }
 
 #messages p {
@@ -45,9 +54,10 @@ body {
 }
 
 #topicdisplay {
-    position: relative;
-    left: 41%;
-    color:white;
+    position: static;
+    text-align: center;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    color: #222223;
     font-weight: bold;
 }
 
@@ -62,16 +72,24 @@ body {
     font-size: 13px;
     border-radius: 10px 10px;
     border: 2px solid black;
-    
+
 }
 
 #aihe {
     font-size: 20px;
     font-weight: bold;
-    
+
 }
 
 .teksti {
     font-family: monaco, Consolas, "Lucida Console", monospace;
     font-size: 18px;
+}
+
+#marq {
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 18px;
+    position: fixed;
+    bottom: 25px;
+    text-align: center;
 }

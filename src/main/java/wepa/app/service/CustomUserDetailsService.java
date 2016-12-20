@@ -26,9 +26,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accRepo.findByUsername(username);
+
         if (account == null) {
+
             throw new UsernameNotFoundException("No such user: " + username);
+
         }
+
         List<GrantedAuthority> list = buildUserAuthority(account.getRoles());
 
         return new org.springframework.security.core.userdetails.User(

@@ -22,6 +22,7 @@ public class AccountController {
     @Autowired
     private AccountService accService;
 
+    //todo: oman käyttäjätilin muokkaussivu!
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public String getAccount(@PathVariable Long id, Model model) {
         model.addAttribute("account", accountRepo.findOne(id));
@@ -32,20 +33,23 @@ public class AccountController {
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public String registrationGet(Model model) {
         model.addAttribute("account", new Account());
+
         return "register";
     }
 
-//    @RequestMapping(value = "/reg", method = RequestMethod.POST)
-//    public String registrationPost(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "register";
-//        }
-//        accService.save(account);
-//        return "redirect:/login";
-//    }
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    public String registrationPost(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+        accService.save(account);
+
+        return "redirect:/login";
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGet() {
+
         return "login";
     }
 }
