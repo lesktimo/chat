@@ -85,3 +85,11 @@ body {
     font-family: monaco, Consolas, "Lucida Console", monospace;
     font-size: 18px;
 }
+
+#marq {
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    font-size: 18px;
+    position: fixed;
+    bottom: 25px;
+    text-align: center;
+}
