@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name = "account")
 public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany
