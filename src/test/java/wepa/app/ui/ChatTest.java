@@ -101,16 +101,16 @@ public class ChatTest extends FluentTest {
         assertTrue(pageSource().contains("Ryhmä1"));
     }
     
-    @Test
-    public void canDeleteGroup() {
-        login();
-        addGroup();
-        assertTrue(pageSource().contains("Ryhmä1"));
-       
-        $("#delete").submit();
-        
-        assertFalse(pageSource().contains("Ryhmä1"));
-    }
+//    @Test
+//    public void canDeleteGroup() {
+//        login();
+//        addGroup();
+//        assertTrue(pageSource().contains("Ryhmä1"));
+//       
+//        $("#delete").submit();
+//        
+//        assertFalse(pageSource().contains("Ryhmä1"));
+//    }
 
 //    @Test
 //    public void canAddMessageToGroup() {
