@@ -94,10 +94,22 @@ public class ChatTest extends FluentTest {
         assertTrue(pageSource().contains("Kaikki chatit"));
         assertFalse(pageSource().contains("Ryhmä1"));
 
+        
         fill(find("#topic")).with("Ryhmä1");
-        submit(find("form").first());
+        $("#add").submit();
 
         assertTrue(pageSource().contains("Ryhmä1"));
+    }
+    
+    @Test
+    public void canDeleteGroup() {
+        login();
+        addGroup();
+        assertTrue(pageSource().contains("Ryhmä1"));
+       
+        $("#delete").submit();
+        
+        assertFalse(pageSource().contains("Ryhmä1"));
     }
 
 //    @Test
@@ -125,7 +137,7 @@ public class ChatTest extends FluentTest {
 
     private void addGroup() {
         goTo(baseUrl + "/groups");
-        fill(find("#topic")).with("Ryhmä1");
-        submit(find("form").first());
+       fill(find("#topic")).with("Ryhmä1");
+        $("#add").submit();
     }
 }
