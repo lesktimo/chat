@@ -8,10 +8,12 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import wepa.app.repo.GroupRepo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -20,6 +22,9 @@ public class ChatTest extends FluentTest {
 
     public WebDriver webDriver = new HtmlUnitDriver();
     private String baseUrl;
+    
+    @Autowired
+    private GroupRepo groupRepo;
 
     @Override
     public WebDriver getDefaultDriver() {
@@ -32,6 +37,7 @@ public class ChatTest extends FluentTest {
     @Before
     public void setUp() {
         baseUrl = "http://localhost:" + port;
+        groupRepo.deleteAll();
     }
 
     @Test
@@ -61,30 +67,22 @@ public class ChatTest extends FluentTest {
         assertTrue(pageSource().contains("Väärä käyttäjänimi tai salasana!"));
     }
 
-//    @Test
-//    public void testRegistration() {
-//        goTo(baseUrl + "/reg");
-//        fill(find("#username")).with("user1");
-//        fill(find("#password")).with("pass");
-//        submit(find("form").first());
-//
-//        assertTrue(pageSource().contains("Kirjaudu sisään"));
-//    }
+    @Test
+    public void testRegistration() {
+        goTo(baseUrl + "/reg");
+        fill(find("#username")).with("user1");
+        fill(find("#password")).with("pass");
+        submit(find("form").first());
 
-//    @Test
-//    public void cantRegisterWithMissingInformation() {
-//        goTo(baseUrl + "/reg");
-//        fill(find("#username")).with("user1");
-//        submit(find("form").first());
-//
-//        assertTrue(pageSource().contains("length must be between 4 and 2147483647"));
-//        fill(find("#username")).with("");
-//        
-//        fill(find("#password")).with("pass");
-//        submit(find("form").first());
-//
-//        assertTrue(pageSource().contains("length must be between 4 and 25"));
-//    }
+        assertTrue(pageSource().contains("Kirjaudu sisään"));
+        
+        fill(find("#username")).with("user1");
+        fill(find("#password")).with("pass");
+        
+        $("button", withText("Kirjaudu sisään")).click();
+
+        assertTrue(pageSource().contains("Kaikki chatit"));
+    }
 
     @Test
     public void canAddGroup() {
@@ -93,7 +91,6 @@ public class ChatTest extends FluentTest {
         goTo(baseUrl + "/groups");
         assertTrue(pageSource().contains("Kaikki chatit"));
         assertFalse(pageSource().contains("Ryhmä1"));
-
         
         fill(find("#topic")).with("Ryhmä1");
         $("#add").submit();
@@ -101,6 +98,7 @@ public class ChatTest extends FluentTest {
         assertTrue(pageSource().contains("Ryhmä1"));
     }
     
+    // Menee lokaalisti läpi, mutta travis hylkää
 //    @Test
 //    public void canDeleteGroup() {
 //        login();
@@ -116,8 +114,10 @@ public class ChatTest extends FluentTest {
 //    public void canAddMessageToGroup() {
 //        login();
 //        addGroup();
+//        assertTrue(pageSource().contains("Ryhmä1"));
+//
 //        $("a", withText("Ryhmä1")).click();
-//        
+//
 //        String message = "Hello World!";
 //
 //        assertFalse(pageSource().contains(message));
@@ -127,6 +127,30 @@ public class ChatTest extends FluentTest {
 //
 //        assertTrue(pageSource().contains(message));
 //    }
+    
+    @Test
+    public void testGetRegistrationPage() {
+        goTo(baseUrl);
+        assertTrue(pageSource().contains("Kirjaudu sisään"));
+        $("a", withText("Rekisteröidy")).click();
+        assertTrue(pageSource().contains("Lähetä"));
+    }
+    
+    @Test
+    public void registratingWithMissingInfoGivesError() {
+        goTo(baseUrl + "/reg");
+        
+        fill(find("#username")).with("test");
+        $("button", withText("Lähetä")).click();
+        
+        assertTrue(pageSource().contains("length must be between 4 and 2147483647"));
+       
+        goTo(baseUrl + "/reg");
+        
+        fill(find("#password")).with("test");
+          $("button", withText("Lähetä")).click();
+        assertTrue(pageSource().contains("length must be between 4 and 25"));
+    }
 
     private void login() {
         goTo(baseUrl + "/login");

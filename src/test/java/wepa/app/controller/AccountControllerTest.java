@@ -17,7 +17,7 @@
 //
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
-//@ActiveProfiles("dev")
+//@ActiveProfiles("production")
 //public class AccountControllerTest {
 //
 //    @Autowired
@@ -34,14 +34,19 @@
 //        accountRepo.deleteAll();
 //    }
 //
+////    @Test
+////    public void testGetAccount() throws Exception {
+////        Account a = new Account();
+////        a.setUsername("test");
+////        a.setPassword("test");
+////        a = accountRepo.save(a);
+////        
+////        mockMvc.perform(get("/account/" + a.getId())).andExpect(status().isOk());
+////
+////    }
+//    
 //    @Test
-//    public void testGetAccount() throws Exception {
-//        Account a = new Account();
-//        a.setUsername("test");
-//        a.setPassword("test");
-//        a = accountRepo.save(a);
-//        
-//        mockMvc.perform(get("/account/" + a.getId())).andExpect(status().isOk());
-//
+//    public void testRegistrationGet() throws Exception {
+//        mockMvc.perform(get("/reg")).andExpect(status().isOk());
 //    }
 //}
