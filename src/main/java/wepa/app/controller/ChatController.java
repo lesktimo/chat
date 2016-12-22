@@ -56,11 +56,11 @@ public class ChatController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ChatGroup deleteGroup(@PathVariable Long id) {
+    public String deleteGroup(@PathVariable Long id) {
         ChatGroup g = groupRepo.getOne(id);
         groupRepo.delete(g);
 
-        return g;
+        return "redirect:/groups";
     }
 
     @RequestMapping(value = "/mygroups", method = RequestMethod.GET)
