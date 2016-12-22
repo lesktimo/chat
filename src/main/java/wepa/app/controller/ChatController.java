@@ -55,7 +55,6 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
     public String deleteGroup(@PathVariable Long id) {
         ChatGroup g = groupRepo.getOne(id);
         groupRepo.delete(g);
