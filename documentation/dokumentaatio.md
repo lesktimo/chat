@@ -11,7 +11,7 @@ Chat-sovellus on toteutettu Javalla Spring Boot -projektia käyttäen ja Postgre
 ##Käyttötapaukset
 
 Kirjautumattoman käyttäjän käyttötapaukset
- *Sovellukseen rekisteröityminen
+ * Sovellukseen rekisteröityminen
 
 Kirjautuneen käyttäjän käyttötapaukset
 * Sovellukseen kirjautuminen
