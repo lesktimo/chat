@@ -1,4 +1,4 @@
-# chat
+# Chat
 Yksinkertainen chat jossa voidaan luoda ja seurata keskusteluja
 
 [Dokumentaatio](documentation/dokumentaatio.md)
