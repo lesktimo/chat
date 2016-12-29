@@ -14,7 +14,7 @@
 
             <ul>
                 <li th:each="group : ${owngroups}">
-                    <a th:href="@{{groupId}(groupId=${group.id})}"  id="aihe" th:text="${group.topic}">group topic</a>
+                    <a  th:href="@{{groupId}(groupId=${group.id})}"  id="aihe" th:text="${group.topic}">group topic</a>
                 </li>
             </ul>
 

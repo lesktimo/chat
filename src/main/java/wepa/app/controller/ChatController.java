@@ -1,6 +1,7 @@
 package wepa.app.controller;
 
 import java.security.Principal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import wepa.app.domain.Account;
 import wepa.app.domain.ChatGroup;
 import wepa.app.domain.Message;
@@ -57,6 +57,15 @@ public class ChatController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteGroup(@PathVariable Long id) {
         ChatGroup g = groupRepo.getOne(id);
+        
+        List<Account> accounts = accountRepo.findAll();
+        for (Account account : accounts) {
+            if (account.getChatGroups().contains(g)) {
+                account.getChatGroups().remove(g);
+                accountRepo.save(account);
+            }
+        }
+        
         groupRepo.delete(g);
 
         return "redirect:/groups";
