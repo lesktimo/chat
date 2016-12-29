@@ -1,5 +1,12 @@
 # chat
-chat
+Yksinkertainen chat jossa voidaan luoda ja seurata keskusteluja
+
+
+**Tietokantakaavio**
+
+
+
+![tietokantakaavio](/documentation/Tietokantakaavio.png)
 
 #Heroku app:
 http://mexican-armada-chat.herokuapp.com/login
