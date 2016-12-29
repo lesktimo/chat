@@ -11,20 +11,20 @@ Chat-sovellus on toteutettu Javalla Spring Boot -projektia käyttäen ja Postgre
 ##Käyttötapaukset
 
 Kirjautumattoman käyttäjän käyttötapaukset
-*Sovellukseen rekisteröityminen
+ *Sovellukseen rekisteröityminen
 
 Kirjautuneen käyttäjän käyttötapaukset
-*Sovellukseen kirjautuminen
-*Ryhmien selailu, seuraaminen ja lisääminen
-*Ryhmään osallistuminen
-*Viestien lukeminen ja lähettäminen
+* Sovellukseen kirjautuminen
+* Ryhmien selailu, seuraaminen ja lisääminen
+* Ryhmään osallistuminen
+* Viestien lukeminen ja lähettäminen
 
 ##Käyttöohje
 
 Harjoitustyö sijaitsee osoitteessa http://mexican-armada-chat.herokuapp.com/login. Sovellukseen pääsee kirjautumaan tunnuksilla:
 
-*käyttäjätunnus: testi
-*salasana: testi
+* käyttäjätunnus: testi
+* salasana: testi
 
 
 
